@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卓球情報。</title>
+  <style>
+    :root {
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-color: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary: #0284c7;
+      --accent-jp: #2563eb;
+      --accent-global: #dc2626;
+      --header-bg: #0f172a;
+      --header-text: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-color: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary: #38bdf8;
+      --shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.5;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* ヘッダー */
+    header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    /* 3カラムレイアウト */
+    .dashboard-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 280px 1fr 1fr;
+      gap: 16px;
+      height: calc(100vh - 60px);
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-container {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 6px;
+    }
+
+    /* ミニカレンダー */
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+    .cal-day-head { font-weight: bold; color: var(--text-muted); }
+    .cal-day { padding: 5px 0; border-radius: 4px; background: var(--bg-color); }
+    .cal-day.event { background: var(--primary); color: #fff; font-weight: bold; }
+
+    /* 大会リスト */
+    .tournament-item {
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: var(--bg-color);
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      border-left: 4px solid var(--primary);
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .badge-live { background: #ef4444; }
+    .badge-upcoming { background: #0284c7; }
+    .badge-jp { background: var(--accent-jp); }
+    .badge-global { background: var(--accent-global); }
+
+    /* メモ欄 */
+    .note-textarea {
+      width: 100%;
+      height: 110px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      background: var(--bg-color);
+      color: var(--text-color);
+      resize: vertical;
+    }
+    .note-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { background: var(--border-color); color: var(--text-color); }
+    .btn-load-more {
+      width: 100%;
+      margin-top: 12px;
+      background: var(--bg-color);
+      border: 1px dashed var(--primary);
+      color: var(--primary);
+      transition: all 0.2s;
+    }
+    .btn-load-more:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .save-status { font-size: 0.72rem; color: #10b981; opacity: 0; transition: opacity 0.3s; }
+
+    /* ニュースカード */
+    .news-card-featured {
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .featured-img {
+      width: 100%;
+      height: 140px;
+      background: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #475569;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+    .featured-content { padding: 12px; }
+    .news-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .news-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-color);
+      transition: color 0.2s;
+    }
+    .news-title:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* AI翻訳アコーディオン */
+    .ai-badge {
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: bold;
+    }
+    .accordion-toggle {
+      cursor: pointer;
+      font-size: 0.75rem;
+      color: var(--primary);
+      margin-top: 4px;
+      display: inline-block;
+    }
+    .accordion-content {
+      display: none;
+      background: var(--bg-color);
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-top: 6px;
+      font-size: 0.78rem;
+    }
+    .accordion-content.open { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <h1>卓球情報。</h1>
+      <span style="font-size:0.7rem; background:#334155; padding:2px 6px; border-radius:10px;">β</span>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀️ モード切替</button>
+  </header>
+
+  <div class="dashboard-container">
+
+    <!-- 左カラム：カレンダー & メモ -->
+    <div class="column">
+      
+      <!-- カレンダー -->
+      <div class="card">
+        <div class="card-title">
+          <span>🗓️ 大会カレンダー</span>
+          <span style="font-size:0.72rem; color:var(--text-muted);">10月</span>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-day-head">日</div><div class="cal-day-head">月</div><div class="cal-day-head">火</div>
+          <div class="cal-day-head">水</div><div class="cal-day-head">木</div><div class="cal-day-head">金</div>
+          <div class="cal-day-head">土</div>
+
+          <div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div>
+          <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div>
+          <div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div>
+          <div class="cal-day event" title="WTT China Smash">8</div><div class="cal-day event">9</div><div class="cal-day event">10</div><div class="cal-day">11</div>
+          <div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div>
+          <div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div>
+          <div class="cal-day event" title="Tリーグ公式戦">24</div><div class="cal-day event">25</div>
+        </div>
+      </div>
+
+      <!-- 注目大会 -->
+      <div class="card">
+        <div class="card-title">
+          <span>🏆 直近の注目大会</span>
+        </div>
+        <div class="tournament-item">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="badge badge-live">開催中 🔴</span>
+            <span class="badge badge-global">WTT</span>
+          </div>
+          <div style="font-weight:bold; margin-top:4px;">
+            <a href="https://www.worldtabletennis.com/" target="_blank" rel="noopener noreferrer" style="color:inherit; text-decoration:none;">WTT China Smash 2026 ↗</a>
+          </div>
+          <div style="font-size:0.72rem; color:var(--text-muted);">10/08 - 10/18 | 北京</div>
+        </div>
+
+        <div class="tournament-item">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="badge badge-upcoming">あと22日</span>
+            <span class="badge badge-jp">国内</span>
+          </div>
+          <div style="font-weight:bold; margin-top:4px;">
+            <a href="https://tleague.jp/" target="_blank" rel="noopener noreferrer" style="color:inherit; text-decoration:none;">ノジマTリーグ 2026-2027公式戦 ↗</a>
+          </div>
+          <div style="font-size:0.72rem; color:var(--text-muted);">10/24 - 10/25 | 墨田区</div>
+        </div>
+      </div>
+
+      <!-- 個人メモ欄 -->
+      <div class="card">
+        <div class="card-title">
+          <span>📝 マイメモ（個人用）</span>
+        </div>
+        <textarea id="user-note" class="note-textarea" placeholder="観戦予定や注目選手のメモを入力...（ブラウザに自動保存されます）"></textarea>
+        <div class="note-actions">
+          <button class="btn btn-primary" onclick="saveNote()">💾 保存</button>
+          <span id="save-status" class="save-status">保存されました！</span>
+          <button class="btn btn-secondary" onclick="clearNote()">🧹 消去</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 中央カラム：国内ニュース -->
+    <div class="column">
+      <div class="card">
+        <div class="card-title">
+          <span>📰 国内ニュースフィード</span>
+          <span style="font-size:0.72rem; color:var(--text-muted);">Rallys / 卓球王国 / JTTA</span>
+        </div>
+
+        <!-- 注目のトップ記事 -->
+        <div class="news-card-featured">
+          <div class="featured-img">🏓 注目記事アイキャッチ画像</div>
+          <div class="featured-content">
+            <div class="news-meta">
+              <span class="badge badge-jp">卓球王国</span>
+              <span>15分前</span>
+            </div>
+            <a href="https://world-tt.com/" target="_blank" rel="noopener noreferrer" class="news-title" style="font-size:1rem; display:block; margin-top:4px;">
+              張本智和、WTTコンテンダー準決勝でフルセットの大激闘を制す！決勝進出決定 ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- 国内ニュースリスト -->
+        <div id="domestic-news-list">
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">Rallys</span><span>32分前</span></div>
+            <a href="https://rallys.online/" target="_blank" rel="noopener noreferrer" class="news-title">早田ひな、復帰戦に向けて順調な調整「自分の卓球をもう一度突き詰める」 ↗</a>
+          </div>
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">JTTA公式</span><span>1時間前</span></div>
+            <a href="https://jtta.or.jp/tournament/schedule" target="_blank" rel="noopener noreferrer" class="news-title">全日本卓球選手権大会（一般の部）組み合わせおよびタイムテーブル発表 ↗</a>
+          </div>
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">卓球王国</span><span>2時間前</span></div>
+            <a href="https://world-tt.com/" target="_blank" rel="noopener noreferrer" class="news-title">松島輝空インタビュー「世界トップ10入りへの手応えと課題」 ↗</a>
+          </div>
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">Rallys</span><span>3時間前</span></div>
+            <a href="https://rallys.online/" target="_blank" rel="noopener noreferrer" class="news-title">【Tリーグ】木下マイスター東京、新戦力海外選手との契約締結を発表 ↗</a>
+          </div>
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">卓球王国</span><span>4時間前</span></div>
+            <a href="https://world-tt.com/" target="_blank" rel="noopener noreferrer" class="news-title">伊藤美誠の多球練習に密着 変幻自在のサービスとバックハンドブロックの進化 ↗</a>
+          </div>
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">Rallys</span><span>5時間前</span></div>
+            <a href="https://rallys.online/" target="_blank" rel="noopener noreferrer" class="news-title">全国高校選抜卓球大会の予選が全国各地で開幕 各県の代表校が出揃う ↗</a>
+          </div>
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">JTTA公式</span><span>6時間前</span></div>
+            <a href="https://jtta.or.jp/" target="_blank" rel="noopener noreferrer" class="news-title">2026年度ナショナルチーム強化指定選手選考会の開催要項について ↗</a>
+          </div>
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">卓球王国</span><span>8時間前</span></div>
+            <a href="https://world-tt.com/" target="_blank" rel="noopener noreferrer" class="news-title">戸上隼輔のフォアドライブ技術「インパクトの強さと身体の使い方」 ↗</a>
+          </div>
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">Rallys</span><span>10時間前</span></div>
+            <a href="https://rallys.online/" target="_blank" rel="noopener noreferrer" class="news-title">平野美宇、全日本社会人卓球選手権で圧巻のV達成「手応えを感じる大会になった」 ↗</a>
+          </div>
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-jp">卓球王国</span><span>12時間前</span></div>
+            <a href="https://world-tt.com/" target="_blank" rel="noopener noreferrer" class="news-title">【ギア解説】最新テンションラバー徹底比較「粘着系 vs 高弾性テンション」 ↗</a>
+          </div>
+        </div>
+
+        <button class="btn btn-load-more" onclick="loadMoreDomestic()">▼ 過去の国内ニュースをさらに読み込む</button>
+
+      </div>
+    </div>
+
+    <!-- 右カラム：海外ニュース (AI翻訳付き) -->
+    <div class="column">
+      <div class="card">
+        <div class="card-title">
+          <span>🌍 海外ニュースフィード</span>
+          <span class="ai-badge">✨ AI自動翻訳</span>
+        </div>
+
+        <!-- 海外ニュースリスト -->
+        <div id="global-news-list">
+          
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🇰🇷 NAVER Sports</span><span>15分前</span></div>
+            <a href="https://m.sports.naver.com/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] シン・ユービン、WTT北京大会に向けた最終調整を完了「コンディションは万全」 ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> 신유빈, WTT 베이징 대회 출격 준비 완료 "최상의 컨디션"</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> 韓国女子のエース申裕斌が大会前記者会見で意気込みを語る。</div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🇨🇳 新浪体育</span><span>30分前</span></div>
+            <a href="https://sports.sina.cn/others/pingpang" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] 王楚欽、最新の世界ランキングでも男子シングルス首位を堅守 ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> 王楚钦继续稳居男单世界第一，林诗栋升至第二</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> 最新ポイントが反映され王楚欽が1位を保持。若手の林詩棟が2位に浮上。</div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🇸🇪 Pingis Sweden</span><span>45分前</span></div>
+            <a href="https://www.pingis.se/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] モーレゴード、スウェーデン選手権男子単で圧倒的連覇を達成 ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> Truls Möregårdh försvarade sitt SM-guld i herrsingel</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> トルルス・モーレゴードが国内選手権のシングルスで再び優勝を果たした。</div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🇹🇼 TSNA</span><span>1時間前</span></div>
+            <a href="https://tsna.com/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] 林昀儒、粘り強いバックハンド攻撃でヨーロッパ王者相手に逆転勝ち ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> 林昀儒展現反手韌性 逆轉擊敗歐洲強敵晉級</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> 台湾のエース林昀儒が巧みなコース突きでフルセットの熱戦を制す。</div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🇩🇪 MyTischtennis</span><span>2時間前</span></div>
+            <a href="https://www.mytischtennis.de/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] ブンジッチ、ドイツ・ブンデスリーガ開幕戦で劇的勝利 ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> Duda und Franziska siegreich zum Saisonauftakt</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> ドイツリーグ第1節にて、ドゥダとフランチスカが共に白星スタート。</div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🌍 WTT Official</span><span>3時間前</span></div>
+            <a href="https://www.worldtabletennis.com/news" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] 孫穎莎、北京スマッシュの女子シングルス第1シードに決定 ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> Sun Yingsha named top seed for China Smash 2026</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> WTT China Smash 2026の組み合わせが発表され孫穎莎が本命シード。</div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🇺🇸 USATT</span><span>4時間前</span></div>
+            <a href="https://www.usatt.org/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] 全米卓球オープン、エントリー者数が過去最大規模に拡大 ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> US Open Table Tennis Championships sees record registrations</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> アメリカ国内での卓球人気が高まり全米オープンへの参加者が急増。</div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🇫🇷 ActuPing</span><span>5時間前</span></div>
+            <a href="https://www.actuping.com/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] ルブラン兄弟、フランス国内選手権で圧倒的なパフォーマンスを披露 ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> Les frères Lebrun dominent le championnat de France</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> フェリックスとアレクシのルブラン兄弟が快進撃を続け決勝進出を決めた。</div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🇬🇧 TT England</span><span>6時間前</span></div>
+            <a href="https://www.tabletennisengland.co.uk/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] ピッチフォード、英シニアオープンを無敗で完全制覇 ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> Liam Pitchford claims Senior Open title in dominant fashion</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> イギリスのエース・ピッチフォードが国内タイトルを獲得。</div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-meta"><span class="badge badge-global">🇨🇳 乒乓世界</span><span>7時間前</span></div>
+            <a href="https://sports.sina.cn/others/pingpang" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] 中国ナショナルチーム、成都トレーニング基地にて秋季強化合宿を開始 ↗</a>
+            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+            <div class="accordion-content">
+              <div><strong>原文:</strong> 国乒成都封闭集训正式开启，备战下半年重大赛事</div>
+              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> 今後の国際大会に向け、中国代表チームが成都で非公開の集中強化合宿を開始。</div>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="btn btn-load-more" onclick="loadMoreGlobal()">▼ 過去の海外ニュースをさらに読み込む</button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // 1. ダークモード切替
+    function toggleTheme() {
+      const body = document.body;
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+      }
+    }
+
+    // 2. AI翻訳アコーディオン開閉
+    function toggleAccordion(element) {
+      const content = element.nextElementSibling;
+      content.classList.toggle('open');
+      element.textContent = content.classList.contains('open') 
+        ? '▲ 原文 & AI要約を閉じる' 
+        : '▼ 原文 & AI要約を表示';
+    }
+
+    // 3. マイメモ（LocalStorage保存・復元）
+    const noteTextarea = document.getElementById('user-note');
+    const saveStatus = document.getElementById('save-status');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedNote = localStorage.getItem('tt_info_user_note');
+      if (savedNote) {
+        noteTextarea.value = savedNote;
+      }
+      // 最新JSONデータの自動ロードを試行
+      loadLatestNewsFromJSON();
+    });
+
+    function saveNote() {
+      localStorage.setItem('tt_info_user_note', noteTextarea.value);
+      saveStatus.style.opacity = '1';
+      setTimeout(() => { saveStatus.style.opacity = '0'; }, 2000);
+    }
+
+    function clearNote() {
+      if (confirm('メモをクリアしますか？')) {
+        noteTextarea.value = '';
+        localStorage.removeItem('tt_info_user_note');
+      }
+    }
+
+    // 4. 自動生成された data/news.json の動的読み込み処理
+    async function loadLatestNewsFromJSON() {
+      try {
+        const res = await fetch('./data/news.json');
+        if (!res.ok) return;
+        const data = await res.json();
+
+        // 国内ニュースの更新
+        if (data.domestic && data.domestic.length > 0) {
+          const domesticList = document.getElementById('domestic-news-list');
+          domesticList.innerHTML = '';
+          data.domestic.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'news-item';
+            div.innerHTML = `
+              <div class="news-meta"><span class="badge badge-jp">${item.source}</span><span>${item.time}</span></div>
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="news-title">${item.title} ↗</a>
+            `;
+            domesticList.appendChild(div);
+          });
+        }
+
+        // 海外ニュース（AI翻訳済み）の更新
+        if (data.global && data.global.length > 0) {
+          const globalList = document.getElementById('global-news-list');
+          globalList.innerHTML = '';
+          data.global.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'news-item';
+            div.innerHTML = `
+              <div class="news-meta"><span class="badge badge-global">${item.source}</span><span>${item.time}</span></div>
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="news-title">${item.title} ↗</a>
+              <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+              <div class="accordion-content">
+                <div><strong>原文:</strong> ${item.orig || ''}</div>
+                <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> ${item.summary || ''}</div>
+              </div>
+            `;
+            globalList.appendChild(div);
+          });
+        }
+      } catch (err) {
+        console.log("data/news.json 未検出のため初期データを表示中:", err);
+      }
+    }
+
+    // 5. 過去ニュース読み込みボタン（フォールバック用）
+    function loadMoreDomestic() {
+      const list = document.getElementById('domestic-news-list');
+      const pastItems = [
+        { source: 'Rallys', time: '1日前', url: 'https://rallys.online/', title: '【卓球ギア】粘着テンションの最新トレンドとトップ選手の愛用ギア一覧 ↗' },
+        { source: '卓球王国', time: '1日前', url: 'https://world-tt.com/', title: '全日本マスターズ予選、全国の強豪ベテラン選手が集結 ↗' },
+        { source: 'JTTA公式', time: '2日前', url: 'https://jtta.or.jp/', title: '【広報】卓球競技におけるアンチ・ドーピング講習会の開催について ↗' }
+      ];
+
+      pastItems.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'news-item';
+        div.innerHTML = `
+          <div class="news-meta"><span class="badge badge-jp">${item.source}</span><span>${item.time}</span></div>
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="news-title">${item.title}</a>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function loadMoreGlobal() {
+      const list = document.getElementById('global-news-list');
+      const pastItems = [
+        { source: '🇰🇷 NAVER Sports', time: '1日前', url: 'https://m.sports.naver.com/', title: '📌 [AI和訳] アン・ジェヒョン、韓国国内オープンで優勝し代表選考レース一歩リード ↗', orig: '안재현, 국내 오픈 대회 우승으로 대표선발전 우位', summary: '男子卓球の安宰賢が鋭いチキータとフォアドライブで優勝。' },
+        { source: '🇸🇪 Pingis Sweden', time: '1日前', url: 'https://www.pingis.se/', title: '📌 [AI和訳] カールソン＆シェルベリ組、世界選手権ダブルス出場を表明 ↗', orig: 'Karlsson och Källberg siktar mot VM-guld i dubbel', summary: 'スウェーデンの名ダブルスコンビが次期世界選手権での金メダル獲得を宣言。' }
+      ];
+
+      pastItems.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'news-item';
+        div.innerHTML = `
+          <div class="news-meta"><span class="badge badge-global">${item.source}</span><span>${item.time}</span></div>
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="news-title">${item.title}</a>
+          <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
+          <div class="accordion-content">
+            <div><strong>原文:</strong> ${item.orig}</div>
+            <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> ${item.summary}</div>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
