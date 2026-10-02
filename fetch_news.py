@@ -1,10 +1,8 @@
 import os
 import json
 import urllib.request
+import urllib.parse
 import feedparser
-
-# APIキーの取得（設定されていない場合は空文字）
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 # ユーザーエージェントを設定してアクセス遮断（403エラー）を防ぐ
 HEADERS = {
@@ -43,30 +41,35 @@ def main():
                     "time": "最新"
                 })
 
-    # --- 2. 海外ニュース取得（安定した国際フィード） ---
+    # --- 2. 海外ニュース取得（中国・韓国・欧州・WTT公式） ---
     global_sources = [
-        {"name": "WTT Official", "url": "https://www.worldtabletennis.com/rss/news"},
-        {"name": "ITTF", "url": "https://www.ittf.com/feed/"},
-        {"name": "MyTischtennis", "url": "https://www.mytischtennis.de/rss/news.xml"}
+        # 中国ニュース (Google News RSS: 乒乓球)
+        {"name": "🇨🇳 中国ニュース", "url": "https://news.google.com/rss/search?q=%E4%B9%93%E4%B9%93%E7%90%83&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"},
+        # 韓国ニュース (Google News RSS: 탁구)
+        {"name": "🇰🇷 韓国ニュース", "url": "https://news.google.com/rss/search?q=%ED%83%81%EA%B5%AC&hl=ko&gl=KR&ceid=KR:ko"},
+        # WTT / 国際大会公式
+        {"name": "🌐 WTT Official", "url": "https://www.worldtabletennis.com/rss/news"},
+        # ドイツ/欧州ニュース
+        {"name": "🇩🇪 MyTischtennis", "url": "https://www.mytischtennis.de/rss/news.xml"}
     ]
 
     for src in global_sources:
         feed = fetch_feed(src["url"])
         if feed and feed.entries:
-            for entry in feed.entries[:4]:
+            for entry in feed.entries[:3]:
                 title = entry.title
-                summary = "海外の最新卓球ニュースです。"
+                clean_title = title.split(" - ")[0] if " - " in title else title
                 
                 global_news.append({
                     "source": src["name"],
-                    "title": f"📌 {title}",
+                    "title": f"📌 {clean_title}",
                     "url": entry.link,
                     "orig": title,
-                    "summary": summary,
+                    "summary": "海外主要メディアの最新卓球ニュースです。",
                     "time": "最新"
                 })
 
-    # 海外ニュースが取得できなかった場合のフォールバック（画面から消えるのを防止）
+    # データが空の場合のフォールバック
     if not global_news:
         global_news.append({
             "source": "WTT Official",
