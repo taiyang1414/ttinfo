@@ -2,18 +2,6 @@
   "domestic": [
     {
       "source": "Rallys",
-      "title": "第3回ユキカゼi2u@エスフォルタアリーナ八王子（5時間500円）",
-      "url": "https://rallys.online/i2uevent/i2u-893136abddb7b03a5c/",
-      "time": "最新"
-    },
-    {
-      "source": "Rallys",
-      "title": "第19回 松が谷i2U",
-      "url": "https://rallys.online/i2uevent/i2u-569366abde3617f39e/",
-      "time": "最新"
-    },
-    {
-      "source": "Rallys",
       "title": "【卓球】ハイドサービスとは？禁止理由・反則の判定などを徹底解説",
       "url": "https://rallys.online/forplayers/howto/hide-service/",
       "time": "最新"
@@ -32,12 +20,6 @@
     },
     {
       "source": "Rallys",
-      "title": "第13回HS i2Uリーグ",
-      "url": "https://rallys.online/i2uevent/i2u-890146abb8183a8d49/",
-      "time": "最新"
-    },
-    {
-      "source": "Rallys",
       "title": "第23回Y.Y LINKナイトカップ（土曜日)",
       "url": "https://rallys.online/i2uevent/i2u-694516abb87374dae1/",
       "time": "最新"
@@ -47,6 +29,24 @@
       "title": "竹谷美涼が3ランクアップで59位に　張本美和/早田ひなペアが1位をキープ｜卓球女子世界ランキング（2026年第40週）",
       "url": "https://rallys.online/worldranking/2026-40worldranking-w/",
       "time": "最新"
+    },
+    {
+      "source": "Rallys",
+      "title": "国際大会Vの田中佑汰が19ランクアップ　松島輝空は3位をキープ｜卓球男子世界ランキング（2026年第40週）",
+      "url": "https://rallys.online/worldranking/2026-40worldranking-m/",
+      "time": "最新"
+    },
+    {
+      "source": "卓球王国",
+      "title": "JTTA（日本卓球協会）公認S級・A級コーチライセンス トライアルが実施",
+      "url": "https://world-tt.com/blog/news/archives/381610",
+      "time": "最新"
+    },
+    {
+      "source": "卓球王国",
+      "title": "日本各地から1,000名超が参加。第5回島根オープン小中学生大会 10種目で王者が決定",
+      "url": "https://world-tt.com/blog/news/archives/381434",
+      "time": "最新"
     }
   ],
   "global": [
@@ -55,7 +55,7 @@
       "title": "📌 [AI和訳] アジア大会丨林志東が卓球男子シングルスで優勝",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNWlNtbGpnNFcyZlVFWEtaR3ZyTW1zb3psTHdWbXFsVnlTUlRKcGNDOURwdHVBbnJ4VmIyZXpPU1ltdWM0VWVsR3ltTVE4M1o5SzJEMHlXZXNKZjFaN0pUZldFajlyRF82THZfSTNETGNlaHRfLThTMHU4TTFCUXQ2Tg?oc=5",
       "orig": "亚运会丨林诗栋夺得乒乓球男单冠军 - 新华网",
-      "summary": "アジア大会丨林志東、卓球男子シングルスで優勝 新華網",
+      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
       "time": "最新"
     },
     {
@@ -63,7 +63,7 @@
       "title": "📌 [AI和訳] 馬龍はいつも信頼できる中国の卓球ファンです",
       "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBjRThzY0p0UFRVanRia3VLblRjbjJNNlN5RTU2bWdPeW43WGNoRjJOSngzalpSaHBwWUtsNWQ5YmszNzhuSnN1RUx0cVZOWHY2Sl9SWGRzZFFrV2VQU0VRdHA0U205VDhMMW5tNEFiVTBSRlU?oc=5",
       "orig": "马龙，一款你永远可以信任的中国乒乓球团粉 - 手机新浪网",
-      "summary": "馬龍さんはいつでも信頼できる中国の卓球ファンです Sina Mobile",
+      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
       "time": "最新"
     },
     {
@@ -71,7 +71,15 @@
       "title": "📌 [AI和訳] イラン卓球の「ダークホース」少年ファラージ：あらゆる対戦相手に集中して立ち向かう",
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE56SEl4ZzlsTE5za0lKYVpwTXUwMl9pRk1CM2J3SnpXVFJsNmNiMWgxdVZpckxGb2tGQmpGM1gzRmZYUE1UdFBZRzhJUUFIMW9oUGJUT2N1THF4LTdieTN0cFVHR19qS2NJ?oc=5",
       "orig": "伊朗乒乓球“黑马”少年法拉吉：心无旁骛迎接每个对手 - chinanews.com.cn",
-      "summary": "イラン卓球界の「ダークホース」ティーンエイジャー、ファラージ氏：あらゆる対戦相手に集中力で立ち向かう chinanews.com.cn",
+      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
+      "time": "最新"
+    },
+    {
+      "source": "🇰🇷 韓国",
+      "title": "📌 [AI和訳] クォン・スンウのテニス、シン・ユビンの卓球「ノーゴールド」不振…アン・セヨンのバドミントンだけ笑った[アジアゲーム韓国ラケット種目決算]",
+      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE10NmhrYkh4UnVZX18xenZ3VXFHSlBHajNoOTBBSDZCZVdQcEt6eDB5TzlYMTlYYVdMQXFOckRmSk5obW42eWV4dDRvZGVFdDQ?oc=5",
+      "orig": "권순우의 테니스, 신유빈의 탁구 '노골드' 부진…안세영의 배드민턴만 웃었다 [아시안게임 한국 라켓 종목 결산] - v.daum.net",
+      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
       "time": "最新"
     },
     {
@@ -79,7 +87,7 @@
       "title": "📌 [AI和訳] チャン・ハンジェ・チョ・デソン「リターンマッチ」…プロ卓球KTTP第4回コンテスト8強圧縮",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQSFdGd1lnWXY4TWpPUENwalkzQ3I5SGd4VjFybXZQaTBxdmc1OHJXMWhtUTVSWWpxMGtTa2kzUEF1d0hnWVc4VVRjRmM1QWVCNHNaNHVBV21SVnRVNEZNMkZ5dUVIODZWT2lmTlBnU0pyb05UWVEzbnlSOHI5WWtQUQ?oc=5",
       "orig": "장한재·조대성 ‘리턴 매치’…프로탁구 KTTP 4차 대회 8강 압축 - edaily.co.kr",
-      "summary": "チャン・ハンジェ・チョ・デソン「リターンマッチ」…プロ卓球KTTP第4回コンテスト8強圧縮",
+      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
       "time": "最新"
     },
     {
@@ -87,15 +95,7 @@
       "title": "📌 [AI和訳] プロ卓球シリーズ4、絶食8強・ダブル式決勝圧縮！チョ・デソン - チャン・ハンジェリターンマッチ",
       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE4xOG5XT1dKenlBaDZOLXNRdlhkNXNtYThUa0dWVnktM2RBMjFDN0FObERkbWwybXBRdGQ0LS03VWZDU3czNERmMFRsaVpzUHVHRElOSk5jYl83ampWTmRreGJzVFp5a09yd05OX3FyS24?oc=5",
       "orig": "프로탁구 시리즈4, 단식 8강·복식 결승 압축! 조대성-장한재 리턴매치 - SPOTV NEWS",
-      "summary": "プロ卓球シリーズ4、絶食8強・ダブル式決勝圧縮！チョ・デソン - チャン・ハンジェリターンマッチSPOTV NEWS",
-      "time": "最新"
-    },
-    {
-      "source": "🇰🇷 韓国",
-      "title": "📌 [AI和訳] 「今は卓球が楽しくない」",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeTFKcU1ncW16dHk0ME40RnN6RkVGZzNfUm9OWGxzdVAzNW55ZzVXVjFXQ0NGSEc1Z1BNc1FQVVo0MkdtT3NlbFlHRUNPQjRmNFZmc0hLb0tQVlg2NEhTd3hFTHg5Z1JYaGpxMkt0Q3kxT3N0MWNpNlh6MGxta0lUX1VR?oc=5",
-      "orig": "\"이젠 탁구가 즐겁지 않다\" 中 세계 1위 충격 고백...극성팬에 지쳤나 \"정말 역겹다\" 자국도 분노 - sportalkorea.com",
-      "summary": "「今は卓球が楽しくない」",
+      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
       "time": "最新"
     }
   ]
