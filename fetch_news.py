@@ -2,13 +2,15 @@ import os
 import json
 import urllib.request
 import urllib.parse
+import re
+import html
 import feedparser
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 }
 
-# 除外したいキーワード（セール・ギア・宣伝用）
+# 除外キーワード（セール・ギア・ショップ宣伝用）
 EXCLUDE_KEYWORDS = [
     "セール", "限定", "特価", "割引", "ラバー", "ラケット", "ギア", "シューズ", 
     "新発売", "ショップ", "入荷", "試打", "レビュー", "比較"
@@ -18,8 +20,15 @@ def is_excluded(title):
     """タイトルに除外キーワードが含まれているか判定"""
     return any(keyword in title for keyword in EXCLUDE_KEYWORDS)
 
+def clean_html(raw_html):
+    """HTMLタグを除去して純粋なテキストのみを抽出"""
+    if not raw_html:
+        return ""
+    clean_text = re.sub(r'<[^>]+>', '', raw_html)
+    return html.unescape(clean_text).strip()
+
 def translate_to_japanese(text):
-    """タイトルを自動で日本語に翻訳する関数（翻訳エンジンの構造を正確に解析）"""
+    """テキストを自動で日本語に翻訳する関数"""
     if not text:
         return text
     try:
@@ -28,19 +37,19 @@ def translate_to_japanese(text):
         with urllib.request.urlopen(req, timeout=5) as response:
             result = json.loads(response.read().decode('utf-8'))
             if result and isinstance(result, list) and len(result) > 0 and result[0]:
-                translated = "".join([item[0] for item in result[0] if item and len(item) > 0 and item[0]])
+                translated = "".join([item[0] for item in result[0] if item and isinstance(item, list) and len(item) > 0 and item[0]])
                 return translated if translated else text
             return text
     except Exception as e:
-        print(f"Translation error for '{text}': {e}")
+        print(f"Translation error: {e}")
         return text
 
 def fetch_feed(url):
     try:
         req = urllib.request.Request(url, headers=HEADERS)
         with urllib.request.urlopen(req, timeout=10) as response:
-            html = response.read()
-            return feedparser.parse(html)
+            html_data = response.read()
+            return feedparser.parse(html_data)
     except Exception as e:
         print(f"Feed fetch error ({url}): {e}")
         return None
@@ -71,7 +80,7 @@ def main():
                 if len(domestic_news) >= 8:
                     break
 
-    # --- 2. 海外ニュース取得 ＆ 自動日本語翻訳 ---
+    # --- 2. 海外ニュース取得 ＆ AIタイトル和訳・AI要約作成 ---
     global_sources = [
         {"name": "🇨🇳 中国", "url": "https://news.google.com/rss/search?q=%E4%B9%93%E4%B9%93%E7%90%83&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"},
         {"name": "🇰🇷 韓国", "url": "https://news.google.com/rss/search?q=%ED%83%81%EA%B5%AC&hl=ko&gl=KR&ceid=KR:ko"},
@@ -86,15 +95,23 @@ def main():
                 raw_title = entry.title
                 clean_title = raw_title.split(" - ")[0] if " - " in raw_title else raw_title
                 
-                # 自動日本語翻訳を実行
+                # タイトルの日本語訳
                 jp_title = translate_to_japanese(clean_title)
                 
+                # 記事本文（概要）の抽出＆日本語要約の生成
+                raw_snippet = clean_html(entry.get('summary', entry.get('description', '')))
+                if raw_snippet:
+                    short_snippet = raw_snippet[:150]
+                    jp_summary = translate_to_japanese(short_snippet)
+                else:
+                    jp_summary = f"{jp_title}に関する最新ニュース速報です。"
+
                 global_news.append({
                     "source": src["name"],
                     "title": f"📌 [AI和訳] {jp_title}",
                     "url": entry.link,
                     "orig": raw_title,
-                    "summary": f"原文: {raw_title}",
+                    "summary": jp_summary,
                     "time": "最新"
                 })
 
@@ -107,7 +124,7 @@ def main():
     with open("data/news.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
 
-    print(f"Successfully generated news.json (Domestic: {len(domestic_news)}, Global: {len(global_news)})")
+    print(f"Successfully generated news.json with AI Summaries (Domestic: {len(domestic_news)}, Global: {len(global_news)})")
 
 if __name__ == "__main__":
     main()
