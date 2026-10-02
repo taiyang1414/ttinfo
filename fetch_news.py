@@ -19,6 +19,7 @@ def is_excluded(title):
     return any(keyword in title for keyword in EXCLUDE_KEYWORDS)
 
 def translate_to_japanese(text):
+    """タイトルを自動で日本語に翻訳する関数（翻訳エンジンの構造を正確に解析）"""
     if not text:
         return text
     try:
@@ -26,10 +27,12 @@ def translate_to_japanese(text):
         req = urllib.request.Request(url, headers=HEADERS)
         with urllib.request.urlopen(req, timeout=5) as response:
             result = json.loads(response.read().decode('utf-8'))
-            translated = "".join([item for item in result if item])
-            return translated
+            if result and isinstance(result, list) and len(result) > 0 and result[0]:
+                translated = "".join([item[0] for item in result[0] if item and len(item) > 0 and item[0]])
+                return translated if translated else text
+            return text
     except Exception as e:
-        print(f"Translation error: {e}")
+        print(f"Translation error for '{text}': {e}")
         return text
 
 def fetch_feed(url):
@@ -46,7 +49,7 @@ def main():
     domestic_news = []
     global_news = []
 
-    # --- 1. 国内ニュース取得（フィルター適用） ---
+    # --- 1. 国内ニュース取得（除外フィルター適用） ---
     domestic_sources = [
         {"name": "Rallys", "url": "https://rallys.online/feed/"},
         {"name": "卓球王国", "url": "https://world-tt.com/blog/news/feed/"}
@@ -56,7 +59,6 @@ def main():
         feed = fetch_feed(src["url"])
         if feed and feed.entries:
             for entry in feed.entries:
-                # セール・ギア記事はスキップ
                 if is_excluded(entry.title):
                     continue
                 
@@ -69,7 +71,7 @@ def main():
                 if len(domestic_news) >= 8:
                     break
 
-    # --- 2. 海外ニュース取得 & AI自動翻訳 ---
+    # --- 2. 海外ニュース取得 ＆ 自動日本語翻訳 ---
     global_sources = [
         {"name": "🇨🇳 中国", "url": "https://news.google.com/rss/search?q=%E4%B9%93%E4%B9%93%E7%90%83&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"},
         {"name": "🇰🇷 韓国", "url": "https://news.google.com/rss/search?q=%ED%83%81%EA%B5%AC&hl=ko&gl=KR&ceid=KR:ko"},
@@ -82,7 +84,9 @@ def main():
         if feed and feed.entries:
             for entry in feed.entries[:3]:
                 raw_title = entry.title
-                clean_title = raw_title.split(" - ") if " - " in raw_title else raw_title
+                clean_title = raw_title.split(" - ")[0] if " - " in raw_title else raw_title
+                
+                # 自動日本語翻訳を実行
                 jp_title = translate_to_japanese(clean_title)
                 
                 global_news.append({
@@ -103,7 +107,7 @@ def main():
     with open("data/news.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
 
-    print(f"Successfully generated news.json (Filtered Domestic: {len(domestic_news)}, Global: {len(global_news)})")
+    print(f"Successfully generated news.json (Domestic: {len(domestic_news)}, Global: {len(global_news)})")
 
 if __name__ == "__main__":
     main()
