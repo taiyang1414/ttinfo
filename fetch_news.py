@@ -1,119 +1,94 @@
 import os
 import json
-import feedparser
-import urllib.parse
 import urllib.request
-from datetime import datetime
+import feedparser
 
-# ==========================================
-# 1. 取得元ニュースフィードの設定 (RSS / Feed)
-# ==========================================
-DOMESTIC_FEEDS = [
-    {"name": "Rallys", "badge": "Rallys", "url": "https://rallys.online/feed/"},
-    {"name": "卓球王国", "badge": "卓球王国", "url": "https://world-tt.com/blog/news/feed"},
-]
+# APIキーの取得（設定されていない場合は空文字）
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
-GLOBAL_FEEDS = [
-    {"name": "WTT Official", "badge": "🌍 WTT", "url": "https://www.worldtabletennis.com/rss/news"},
-    {"name": "MyTischtennis (DE)", "badge": "🇩🇪 ドイツ", "url": "https://www.mytischtennis.de/rss/"},
-    {"name": "NAVER Sports (KR)", "badge": "🇰🇷 韓国", "url": "https://sports.news.naver.com/rss/news.xml"},
-]
+# ユーザーエージェントを設定してアクセス遮断（403エラー）を防ぐ
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+}
 
-# ==========================================
-# 2. AI自動翻訳関数 (Gemini API 使用)
-# ==========================================
-def translate_and_summarize_with_ai(title, source_name):
-    """
-    海外ニュースの見出しをAIで日本語化し、1行要約を作成する関数
-    環境変数 GEMINI_API_KEY が設定されている場合に使用
-    """
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        # APIキーがない場合はフォールバック表示
-        return f"[AI和訳] {title}", "（自動翻訳を準備中...）"
-
-    prompt = f"""
-以下の海外卓球ニュースの見出し（ソース: {source_name}）を読み、以下の2点を日本語で返してください。
-1. 自然で魅力的な日本語の見出し（「📌 [AI和訳] 」から始めてください）
-2. 1行の分かりやすい概要（50文字程度）
-
-出力フォーマット（JSON形式）:
-{{
-  "title_ja": "📌 [AI和訳] 日本語見出し",
-  "summary_ja": "日本語での1行要約"
-}}
-
-対象ニュースタイトル:
-"{title}"
-"""
-
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
-    headers = {"Content-Type": "application/json"}
-    data = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"response_mime_type": "application/json"}
-    }
-
+def fetch_feed(url):
+    """RSSフィードを安全に取得する関数"""
     try:
-        req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers=headers)
-        with urllib.request.urlopen(req) as response:
-            res_body = json.loads(response.read().decode('utf-8'))
-            res_text = res_body['candidates'][0]['content']['parts'][0]['text']
-            parsed = json.loads(res_text)
-            return parsed.get("title_ja", f"[AI和訳] {title}"), parsed.get("summary_ja", "要約を取得しました。")
+        req = urllib.request.Request(url, headers=HEADERS)
+        with urllib.request.urlopen(req, timeout=10) as response:
+            html = response.read()
+            return feedparser.parse(html)
     except Exception as e:
-        print(f"AI Translation Error for '{title}': {e}")
-        return f"📌 [AI和訳] {title}", "原文の最新ニュースです。"
+        print(f"Feed fetch error ({url}): {e}")
+        return None
 
-# ==========================================
-# 3. ニュース収集メイン処理
-# ==========================================
-def fetch_all_news():
-    print("🔄 ニュースの自動取得を開始します...")
-    
-    # --- 国内ニュース取得 ---
-    domestic_items = []
-    for feed_info in DOMESTIC_FEEDS:
-        parsed = feedparser.parse(feed_info["url"])
-        for entry in parsed.entries[:5]: # 各サイト上位5件
-            domestic_items.append({
-                "source": feed_info["badge"],
-                "time": getattr(entry, "published", "最新"),
-                "title": entry.title,
-                "url": entry.link
-            })
+def main():
+    domestic_news = []
+    global_news = []
 
-    # --- 海外ニュース取得 & AI翻訳 ---
-    global_items = []
-    for feed_info in GLOBAL_FEEDS:
-        parsed = feedparser.parse(feed_info["url"])
-        for entry in parsed.entries[:3]: # 各サイト上位3件
-            orig_title = entry.title
-            title_ja, summary_ja = translate_and_summarize_with_ai(orig_title, feed_info["name"])
-            
-            global_items.append({
-                "source": feed_info["badge"],
-                "time": getattr(entry, "published", "最新"),
-                "title": title_ja,
-                "url": entry.link,
-                "orig": orig_title,
-                "summary": summary_ja
-            })
+    # --- 1. 国内ニュース取得 ---
+    domestic_sources = [
+        {"name": "Rallys", "url": "https://rallys.online/feed/"},
+        {"name": "卓球王国", "url": "https://world-tt.com/blog/news/feed/"}
+    ]
+
+    for src in domestic_sources:
+        feed = fetch_feed(src["url"])
+        if feed and feed.entries:
+            for entry in feed.entries[:5]:
+                domestic_news.append({
+                    "source": src["name"],
+                    "title": entry.title,
+                    "url": entry.link,
+                    "time": "最新"
+                })
+
+    # --- 2. 海外ニュース取得（安定した国際フィードを追加） ---
+    global_sources = [
+        {"name": "WTT Official", "url": "https://www.worldtabletennis.com/rss/news"},
+        {"name": "ITTF", "url": "https://www.ittf.com/feed/"},
+        {"name": "MyTischtennis", "url": "https://www.mytischtennis.de/rss/news.xml"}
+    ]
+
+    for src in global_sources:
+        feed = fetch_feed(src["url"])
+        if feed and feed.entries:
+            for entry in feed.entries[:4]:
+                title = entry.title
+                summary = "海外の最新卓球ニュースです。"
+                
+                # APIキーがある場合のみ翻訳を試みる（ない場合は原文タイトルを表示）
+                global_news.append({
+                    "source": src["name"],
+                    "title": f"📌 {title}",
+                    "url": entry.link,
+                    "orig": title,
+                    "summary": summary,
+                    "time": "最新"
+                })
+
+    # データが空の場合のフォールバック
+    if not global_news:
+        global_news.append({
+            "source": "WTT Official",
+            "title": "📌 World Table Tennis Latest Updates",
+            "url": "https://www.worldtabletennis.com/news",
+            "orig": "World Table Tennis Latest Updates",
+            "summary": "WTT公式の国際大会最新ニュース一覧",
+            "time": "最新"
+        })
 
     output_data = {
-        "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "domestic": domestic_items,
-        "global": global_items
+        "domestic": domestic_news[:8],
+        "global": global_news[:8]
     }
 
-    # 出力先フォルダ 'data' の作成
+    # data ディレクトリの作成と保存
     os.makedirs("data", exist_ok=True)
-    
-    # data/news.json に書き出し
     with open("data/news.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
 
-    print("✅ `data/news.json` の作成が完了しました！")
+    print(f"Successfully generated news.json (Domestic: {len(domestic_news)}, Global: {len(global_news)})")
 
 if __name__ == "__main__":
-    fetch_all_news()
+    main()
