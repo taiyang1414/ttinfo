@@ -43,7 +43,7 @@ def main():
                     "time": "最新"
                 })
 
-    # --- 2. 海外ニュース取得（安定した国際フィードを追加） ---
+    # --- 2. 海外ニュース取得（安定した国際フィード） ---
     global_sources = [
         {"name": "WTT Official", "url": "https://www.worldtabletennis.com/rss/news"},
         {"name": "ITTF", "url": "https://www.ittf.com/feed/"},
@@ -57,7 +57,6 @@ def main():
                 title = entry.title
                 summary = "海外の最新卓球ニュースです。"
                 
-                # APIキーがある場合のみ翻訳を試みる（ない場合は原文タイトルを表示）
                 global_news.append({
                     "source": src["name"],
                     "title": f"📌 {title}",
@@ -67,7 +66,7 @@ def main():
                     "time": "最新"
                 })
 
-    # データが空の場合のフォールバック
+    # 海外ニュースが取得できなかった場合のフォールバック（画面から消えるのを防止）
     if not global_news:
         global_news.append({
             "source": "WTT Official",
