@@ -44,6 +44,32 @@ def translate_to_japanese(text):
         print(f"Translation error: {e}")
         return text
 
+def get_article_summary(link, default_title):
+    """記事ページから og:description や meta description（リード文）を直接取得"""
+    if not link:
+        return ""
+    try:
+        req = urllib.request.Request(link, headers=HEADERS)
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            content_type = resp.headers.get_content_charset() or 'utf-8'
+            html_text = resp.read().decode(content_type, errors='ignore')
+            
+            # meta description / og:description の抽出
+            pattern = r'<meta\s+(?:name|property)=["\'](?:og:)?description["\']\s+content=["\']([^"\']+)["\']'
+            match = re.search(pattern, html_text, re.IGNORECASE)
+            if not match:
+                pattern2 = r'content=["\']([^"\']+)["\']\s+(?:name|property)=["\'](?:og:)?description["\']'
+                match = re.search(pattern2, html_text, re.IGNORECASE)
+            
+            if match:
+                desc = clean_html(match.group(1))
+                # タイトルと重複していないかチェック
+                if len(desc) > 20 and desc.lower() not in default_title.lower():
+                    return desc
+    except Exception as e:
+        print(f"Meta fetch error for {link}: {e}")
+    return ""
+
 def fetch_feed(url):
     try:
         req = urllib.request.Request(url, headers=HEADERS)
@@ -80,7 +106,7 @@ def main():
                 if len(domestic_news) >= 8:
                     break
 
-    # --- 2. 海外ニュース取得 ＆ AIタイトル和訳・AI要約作成 ---
+    # --- 2. 海外ニュース取得 ＆ 本文リード文抽出・AI自動要約 ---
     global_sources = [
         {"name": "🇨🇳 中国", "url": "https://news.google.com/rss/search?q=%E4%B9%93%E4%B9%93%E7%90%83&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"},
         {"name": "🇰🇷 韓国", "url": "https://news.google.com/rss/search?q=%ED%83%81%EA%B5%AC&hl=ko&gl=KR&ceid=KR:ko"},
@@ -98,13 +124,21 @@ def main():
                 # タイトルの日本語訳
                 jp_title = translate_to_japanese(clean_title)
                 
-                # 記事本文（概要）の抽出＆日本語要約の生成
+                # RSSのdescriptionからテキスト抽出
                 raw_snippet = clean_html(entry.get('summary', entry.get('description', '')))
-                if raw_snippet:
-                    short_snippet = raw_snippet[:150]
+                
+                # タイトルと重複・または短すぎる場合は直接記事URLからメタ概要文（リード文）を取得
+                if len(raw_snippet) < 30 or clean_title.lower() in raw_snippet.lower():
+                    meta_desc = get_article_summary(entry.link, clean_title)
+                    if meta_desc:
+                        raw_snippet = meta_desc
+                
+                # 最終的な要約文の作成と日本語訳
+                if raw_snippet and len(raw_snippet) >= 20 and clean_title.lower() not in raw_snippet.lower():
+                    short_snippet = raw_snippet[:180]
                     jp_summary = translate_to_japanese(short_snippet)
                 else:
-                    jp_summary = f"{jp_title}に関する最新ニュース速報です。"
+                    jp_summary = f"【{src['name']}速報】{jp_title}に関する現地最新レポート記事です。"
 
                 global_news.append({
                     "source": src["name"],
@@ -124,7 +158,7 @@ def main():
     with open("data/news.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
 
-    print(f"Successfully generated news.json with AI Summaries (Domestic: {len(domestic_news)}, Global: {len(global_news)})")
+    print(f"Successfully generated news.json with rich summaries (Domestic: {len(domestic_news)}, Global: {len(global_news)})")
 
 if __name__ == "__main__":
     main()
