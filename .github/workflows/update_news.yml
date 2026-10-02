@@ -2,8 +2,8 @@ name: Auto Fetch & Translate Table Tennis News
 
 on:
   schedule:
-    - cron: '0 * * * *'
-  workflow_dispatch:
+    - cron: '0 * * * *' # 1時間ごとに自動実行
+  workflow_dispatch: # 手動実行ボタン
 
 permissions:
   contents: write
@@ -29,10 +29,7 @@ jobs:
           pip install feedparser
 
       - name: ニュース取得＆AI翻訳の実行
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          python fetch_news.py
+        run: python fetch_news.py
 
       - name: news.jsonの自動コミット＆プッシュ
         run: |
@@ -40,6 +37,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git fetch origin main
           git reset --soft origin/main
-          git add -A
-          git commit -m "Auto update news data [skip ci]" || exit 0
+          git add data/news.json
+          git commit -m "Auto update news data [skip ci]" || echo "No changes to commit"
           git push origin main
