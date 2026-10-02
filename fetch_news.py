@@ -16,48 +16,42 @@ STRICT_EXCLUDE = [
     "新発売", "ショップ", "入荷", "試打", "レビュー", "比較"
 ]
 
-# ジュニア・育成系キーワード（※バンビは日本の卓球の礎となる重要カテゴリーのため除外対象から外しています）
+# ジュニア・育成系キーワード（※バンビは除外対象から外す）
 JUNIOR_KEYWORDS = ["U12", "U-12", "U15", "U-15", "ホープス", "カブ", "小学生", "I2U"]
 
-# 主要大会・重要結果を示すキーワード（ジュニア系でもこれらがあれば通す）
+# 主要大会・重要結果を示すキーワード
 MAJOR_RESULT_KEYWORDS = ["全日本", "全国", "優勝", "決定", "日本一", "決勝", "代表", "メダル", "王者", "制覇", "バンビ"]
 
 def is_excluded(title):
+    if not isinstance(title, str):
+        return False
     title_upper = title.upper()
-    # セール・ギア商品は完全除外
     if any(k.upper() in title_upper for k in STRICT_EXCLUDE):
         return True
-    
-    # バンビが含まれている場合は絶対に除外せず優先保持
     if "バンビ" in title or "BAMBI" in title_upper:
         return False
-
-    # その他のジュニア・i2U関連キーワードが含まれる場合
     if any(k.upper() in title_upper for k in JUNIOR_KEYWORDS):
-        # 「全日本」「全国」「優勝」「日本一」など重要な結果ニュースなら残す
         if any(m in title for m in MAJOR_RESULT_KEYWORDS):
             return False
-        # 単なるローカル大会や日常の記事は除外
         return True
-        
     return False
 
 def clean_html(raw_html):
-    if not raw_html:
+    if not raw_html or not isinstance(raw_html, str):
         return ""
     clean_text = re.sub(r'<[^>]+>', '', raw_html)
     return html.unescape(clean_text).strip()
 
 def translate_to_japanese(text):
-    if not text:
-        return text
+    if not text or not isinstance(text, str):
+        return text if isinstance(text, str) else ""
     try:
         url = f"https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ja&dt=t&q={urllib.parse.quote(text)}"
         req = urllib.request.Request(url, headers=HEADERS)
         with urllib.request.urlopen(req, timeout=5) as response:
             result = json.loads(response.read().decode('utf-8'))
-            if result and isinstance(result, list) and len(result) > 0 and result:
-                translated = "".join([item for item in result if item and isinstance(item, list) and len(item) > 0 and item])
+            if result and isinstance(result, list) and len(result) > 0 and result[0]:
+                translated = "".join([item[0] for item in result[0] if item and isinstance(item, list) and len(item) > 0 and isinstance(item[0], str)])
                 return translated if translated else text
             return text
     except Exception as e:
@@ -65,7 +59,7 @@ def translate_to_japanese(text):
         return text
 
 def get_article_summary(link, default_title):
-    if not link:
+    if not link or not isinstance(link, str):
         return ""
     try:
         req = urllib.request.Request(link, headers=HEADERS)
@@ -81,7 +75,7 @@ def get_article_summary(link, default_title):
             
             if match:
                 desc = clean_html(match.group(1))
-                if len(desc) > 20 and desc.lower() not in default_title.lower():
+                if len(desc) > 20 and isinstance(default_title, str) and desc.lower() not in default_title.lower():
                     return desc
     except Exception as e:
         print(f"Meta fetch error for {link}: {e}")
@@ -112,13 +106,14 @@ def main():
         feed = fetch_feed(src["url"])
         if feed and feed.entries:
             for entry in feed.entries:
-                if is_excluded(entry.title):
+                title = entry.title if hasattr(entry, 'title') and isinstance(entry.title, str) else ''
+                if is_excluded(title):
                     continue
                 
                 domestic_news.append({
                     "source": src["name"],
-                    "title": entry.title,
-                    "url": entry.link,
+                    "title": title,
+                    "url": entry.link if hasattr(entry, 'link') and isinstance(entry.link, str) else '',
                     "time": "最新"
                 })
                 if len(domestic_news) >= 8:
@@ -126,7 +121,7 @@ def main():
             if len(domestic_news) >= 8:
                 break
 
-    # --- 2. 海外ニュース取得 ＆ 本文リード文抽出・AI自動要約 ---
+    # --- 2. 海外ニュース取得 ＆ AI自動要約 ---
     global_sources = [
         {"name": "🇨🇳 中国", "url": "https://news.google.com/rss/search?q=%E4%B9%93%E4%B9%93%E7%90%83&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"},
         {"name": "🇰🇷 韓国", "url": "https://news.google.com/rss/search?q=%ED%83%81%EA%B5%AC&hl=ko&gl=KR&ceid=KR:ko"},
@@ -138,14 +133,15 @@ def main():
         feed = fetch_feed(src["url"])
         if feed and feed.entries:
             for entry in feed.entries[:3]:
-                raw_title = entry.title
-                clean_title = raw_title.split(" - ") if " - " in raw_title else raw_title
+                raw_title = entry.title if hasattr(entry, 'title') and isinstance(entry.title, str) else ''
+                # ★ 修正箇所: 配列ではなく先頭の文字列要素 [0] を確実に取得
+                clean_title = raw_title.split(" - ")[0] if " - " in raw_title else raw_title
                 
                 jp_title = translate_to_japanese(clean_title)
                 raw_snippet = clean_html(entry.get('summary', entry.get('description', '')))
                 
                 if len(raw_snippet) < 30 or clean_title.lower() in raw_snippet.lower():
-                    meta_desc = get_article_summary(entry.link, clean_title)
+                    meta_desc = get_article_summary(entry.link if hasattr(entry, 'link') and isinstance(entry.link, str) else '', clean_title)
                     if meta_desc:
                         raw_snippet = meta_desc
                 
@@ -158,7 +154,7 @@ def main():
                 global_news.append({
                     "source": src["name"],
                     "title": f"📌 [AI和訳] {jp_title}",
-                    "url": entry.link,
+                    "url": entry.link if hasattr(entry, 'link') and isinstance(entry.link, str) else '',
                     "orig": raw_title,
                     "summary": jp_summary,
                     "time": "最新"
