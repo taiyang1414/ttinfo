@@ -1,4 +1,311 @@
 {
+  "rankings": {
+    "updated": "2026年第40週",
+    "men": [
+      {
+        "rank": 1,
+        "name": "王楚欽 (Wang Chuqin)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 2,
+        "name": "林詩棟 (Lin Shidong)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 3,
+        "name": "松島輝空",
+        "flag": "🇯🇵",
+        "tag": "日本最高位"
+      },
+      {
+        "rank": 4,
+        "name": "張本智和",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 5,
+        "name": "F.ルブラン (Felix Lebrun)",
+        "flag": "🇫🇷",
+        "tag": "フランス"
+      },
+      {
+        "rank": 6,
+        "name": "モーレゴード (Truls Moregard)",
+        "flag": "🇸🇪",
+        "tag": "スウェーデン"
+      },
+      {
+        "rank": 7,
+        "name": "梁靖崑 (Liang Jingkun)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 8,
+        "name": "馬龍 (Ma Long)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 9,
+        "name": "樊振東 (Fan Zhendong)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 10,
+        "name": "林昀儒 (Lin Yun-Ju)",
+        "flag": "🇹🇼",
+        "tag": "チャイニーズタイペイ"
+      },
+      {
+        "rank": 11,
+        "name": "カルデラノ (Hugo Calderano)",
+        "flag": "🇧🇷",
+        "tag": "ブラジル"
+      },
+      {
+        "rank": 12,
+        "name": "チン・チウ (Dang Qiu)",
+        "flag": "🇩🇪",
+        "tag": "ドイツ"
+      },
+      {
+        "rank": 13,
+        "name": "戸上隼輔",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 14,
+        "name": "張禹珍 (Jang Woojin)",
+        "flag": "🇰🇷",
+        "tag": "韓国"
+      },
+      {
+        "rank": 15,
+        "name": "カールソン (Kristian Karlsson)",
+        "flag": "🇸🇪",
+        "tag": "スウェーデン"
+      },
+      {
+        "rank": 16,
+        "name": "シェルベリ (Anton Kallberg)",
+        "flag": "🇸🇪",
+        "tag": "スウェーデン"
+      },
+      {
+        "rank": 17,
+        "name": "オフチャロフ (Dimitrij Ovtcharov)",
+        "flag": "🇩🇪",
+        "tag": "ドイツ"
+      },
+      {
+        "rank": 18,
+        "name": "篠塚大登",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 19,
+        "name": "アッサール (Omar Assar)",
+        "flag": "🇪🇬",
+        "tag": "エジプト"
+      },
+      {
+        "rank": 20,
+        "name": "安宰賢 (An Jaehyun)",
+        "flag": "🇰🇷",
+        "tag": "韓国"
+      },
+      {
+        "rank": 21,
+        "name": "林鐘勲 (Lim Jonghoon)",
+        "flag": "🇰🇷",
+        "tag": "韓国"
+      },
+      {
+        "rank": 22,
+        "name": "A.ルブラン (Alexis Lebrun)",
+        "flag": "🇫🇷",
+        "tag": "フランス"
+      },
+      {
+        "rank": 23,
+        "name": "フランツィスカ (Patrick Franziska)",
+        "flag": "🇩🇪",
+        "tag": "ドイツ"
+      },
+      {
+        "rank": 24,
+        "name": "高承睿 (Kao Cheng-Jui)",
+        "flag": "🇹🇼",
+        "tag": "チャイニーズタイペイ"
+      },
+      {
+        "rank": 25,
+        "name": "ヨルジッチ (Darko Jorgic)",
+        "flag": "🇸🇮",
+        "tag": "スロベニア"
+      }
+    ],
+    "women": [
+      {
+        "rank": 1,
+        "name": "孫穎莎 (Sun Yingsha)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 2,
+        "name": "王曼昱 (Wang Manyu)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 3,
+        "name": "張本美和",
+        "flag": "🇯🇵",
+        "tag": "日本最高位"
+      },
+      {
+        "rank": 4,
+        "name": "王芸迪 (Wang Yidi)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 5,
+        "name": "陳夢 (Chen Meng)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 6,
+        "name": "早田ひな",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 7,
+        "name": "陳幸同 (Chen Xingtong)",
+        "flag": "🇨🇳",
+        "tag": "中国"
+      },
+      {
+        "rank": 8,
+        "name": "申裕斌 (Shin Yubin)",
+        "flag": "🇰🇷",
+        "tag": "韓国"
+      },
+      {
+        "rank": 9,
+        "name": "スッチ (Bernadette Szocs)",
+        "flag": "🇷🇴",
+        "tag": "ルーマニア"
+      },
+      {
+        "rank": 10,
+        "name": "ディアス (Adriana Diaz)",
+        "flag": "🇵🇷",
+        "tag": "プエルトリコ"
+      },
+      {
+        "rank": 11,
+        "name": "鄭怡静 (Cheng I-Ching)",
+        "flag": "🇹🇼",
+        "tag": "チャイニーズタイペイ"
+      },
+      {
+        "rank": 12,
+        "name": "大藤沙月",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 13,
+        "name": "佐藤瞳",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 14,
+        "name": "ポルカノバ (Sofia Polcanova)",
+        "flag": "🇦🇹",
+        "tag": "オーストリア"
+      },
+      {
+        "rank": 15,
+        "name": "橋本帆乃香",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 16,
+        "name": "ミッテルハム (Nina Mittelham)",
+        "flag": "🇩🇪",
+        "tag": "ドイツ"
+      },
+      {
+        "rank": 17,
+        "name": "パバド (Prithika Pavade)",
+        "flag": "🇫🇷",
+        "tag": "フランス"
+      },
+      {
+        "rank": 18,
+        "name": "長﨑美柚",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 19,
+        "name": "木原美悠",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 20,
+        "name": "メシュレフ (Dina Meshref)",
+        "flag": "🇪🇬",
+        "tag": "エジプト"
+      },
+      {
+        "rank": 21,
+        "name": "田志希 (Jeon Jihee)",
+        "flag": "🇰🇷",
+        "tag": "韓国"
+      },
+      {
+        "rank": 22,
+        "name": "朱芊曦 (Joo Cheonhui)",
+        "flag": "🇰🇷",
+        "tag": "韓国"
+      },
+      {
+        "rank": 23,
+        "name": "シャン・シャオナ (Shan Xiaona)",
+        "flag": "🇩🇪",
+        "tag": "ドイツ"
+      },
+      {
+        "rank": 24,
+        "name": "伊藤美誠",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      },
+      {
+        "rank": 25,
+        "name": "平野美宇",
+        "flag": "🇯🇵",
+        "tag": "日本"
+      }
+    ]
+  },
   "domestic": [
     {
       "source": "Rallys",
@@ -55,7 +362,7 @@
       "title": "📌 [AI和訳] アジア大会丨林志東が卓球男子シングルスで優勝",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNWlNtbGpnNFcyZlVFWEtaR3ZyTW1zb3psTHdWbXFsVnlTUlRKcGNDOURwdHVBbnJ4VmIyZXpPU1ltdWM0VWVsR3ltTVE4M1o5SzJEMHlXZXNKZjFaN0pUZldFajlyRF82THZfSTNETGNlaHRfLThTMHU4TTFCUXQ2Tg?oc=5",
       "orig": "亚运会丨林诗栋夺得乒乓球男单冠军 - 新华网",
-      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
+      "summary": "【🇨🇳 中国速報】「アジア大会丨林志東が卓球男子シングルスで優勝」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
@@ -63,7 +370,7 @@
       "title": "📌 [AI和訳] 馬龍はいつも信頼できる中国の卓球ファンです",
       "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBjRThzY0p0UFRVanRia3VLblRjbjJNNlN5RTU2bWdPeW43WGNoRjJOSngzalpSaHBwWUtsNWQ5YmszNzhuSnN1RUx0cVZOWHY2Sl9SWGRzZFFrV2VQU0VRdHA0U205VDhMMW5tNEFiVTBSRlU?oc=5",
       "orig": "马龙，一款你永远可以信任的中国乒乓球团粉 - 手机新浪网",
-      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
+      "summary": "【🇨🇳 中国速報】「馬龍はいつも信頼できる中国の卓球ファンです」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
@@ -71,7 +378,7 @@
       "title": "📌 [AI和訳] イラン卓球の「ダークホース」少年ファラージ：あらゆる対戦相手に集中して立ち向かう",
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE56SEl4ZzlsTE5za0lKYVpwTXUwMl9pRk1CM2J3SnpXVFJsNmNiMWgxdVZpckxGb2tGQmpGM1gzRmZYUE1UdFBZRzhJUUFIMW9oUGJUT2N1THF4LTdieTN0cFVHR19qS2NJ?oc=5",
       "orig": "伊朗乒乓球“黑马”少年法拉吉：心无旁骛迎接每个对手 - chinanews.com.cn",
-      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
+      "summary": "【🇨🇳 中国速報】「イラン卓球の「ダークホース」少年ファラージ：あらゆる対戦相手に集中して立ち向かう」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
@@ -79,7 +386,7 @@
       "title": "📌 [AI和訳] クォン・スンウのテニス、シン・ユビンの卓球「ノーゴールド」不振…アン・セヨンのバドミントンだけ笑った[アジアゲーム韓国ラケット種目決算]",
       "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE10NmhrYkh4UnVZX18xenZ3VXFHSlBHajNoOTBBSDZCZVdQcEt6eDB5TzlYMTlYYVdMQXFOckRmSk5obW42eWV4dDRvZGVFdDQ?oc=5",
       "orig": "권순우의 테니스, 신유빈의 탁구 '노골드' 부진…안세영의 배드민턴만 웃었다 [아시안게임 한국 라켓 종목 결산] - v.daum.net",
-      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
+      "summary": "【🇰🇷 韓国速報】「クォン・スンウのテニス、シン・ユビンの卓球「ノーゴールド」不振…アン・セヨンのバドミントンだけ笑った[アジアゲーム韓国ラケット種目決算]」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
@@ -87,7 +394,7 @@
       "title": "📌 [AI和訳] チャン・ハンジェ・チョ・デソン「リターンマッチ」…プロ卓球KTTP第4回コンテスト8強圧縮",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQSFdGd1lnWXY4TWpPUENwalkzQ3I5SGd4VjFybXZQaTBxdmc1OHJXMWhtUTVSWWpxMGtTa2kzUEF1d0hnWVc4VVRjRmM1QWVCNHNaNHVBV21SVnRVNEZNMkZ5dUVIODZWT2lmTlBnU0pyb05UWVEzbnlSOHI5WWtQUQ?oc=5",
       "orig": "장한재·조대성 ‘리턴 매치’…프로탁구 KTTP 4차 대회 8강 압축 - edaily.co.kr",
-      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
+      "summary": "【🇰🇷 韓国速報】「チャン・ハンジェ・チョ・デソン「リターンマッチ」…プロ卓球KTTP第4回コンテスト8強圧縮」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
@@ -95,7 +402,7 @@
       "title": "📌 [AI和訳] プロ卓球シリーズ4、絶食8強・ダブル式決勝圧縮！チョ・デソン - チャン・ハンジェリターンマッチ",
       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE4xOG5XT1dKenlBaDZOLXNRdlhkNXNtYThUa0dWVnktM2RBMjFDN0FObERkbWwybXBRdGQ0LS03VWZDU3czNERmMFRsaVpzUHVHRElOSk5jYl83ampWTmRreGJzVFp5a09yd05OX3FyS24?oc=5",
       "orig": "프로탁구 시리즈4, 단식 8강·복식 결승 압축! 조대성-장한재 리턴매치 - SPOTV NEWS",
-      "summary": "Google ニュースによって世界中の情報源から集められた、包括的な最新ニュース報道。",
+      "summary": "【🇰🇷 韓国速報】「プロ卓球シリーズ4、絶食8強・ダブル式決勝圧縮！チョ・デソン - チャン・ハンジェリターンマッチ」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     }
   ]
