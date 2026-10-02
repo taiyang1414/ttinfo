@@ -74,6 +74,139 @@
       font-size: 0.8rem;
     }
 
+    /* タイトル直下の横型ロードマップ図解バナー */
+    .roadmap-section {
+      max-width: 1440px;
+      margin: 16px auto 0 auto;
+      padding: 0 16px;
+    }
+
+    .roadmap-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .roadmap-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .roadmap-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+
+    .roadmap-countdown-badge {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: #ffffff;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+    }
+
+    /* ステップ型横移動タイムライン */
+    .roadmap-stepper {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      overflow-x: auto;
+      padding: 10px 0 6px 0;
+      gap: 12px;
+    }
+
+    .roadmap-stepper::-webkit-scrollbar {
+      height: 4px;
+    }
+    .roadmap-stepper::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-width: 115px;
+      flex: 1;
+      position: relative;
+    }
+
+    .step-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: calc(50% + 14px);
+      width: calc(100% - 28px);
+      height: 3px;
+      background: #334155;
+      z-index: 1;
+    }
+
+    .step-node {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #334155;
+      border: 2px solid #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      z-index: 2;
+      margin-bottom: 8px;
+      transition: all 0.2s;
+    }
+
+    .step-item.active .step-node {
+      background: #0284c7;
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+
+    .step-item.gold .step-node {
+      background: #d97706;
+      border-color: #fbbf24;
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .step-date {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .step-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      line-height: 1.3;
+    }
+
+    .step-item.gold .step-label {
+      color: #fbbf24;
+      font-weight: 800;
+    }
+
     /* 3カラムレイアウト */
     .dashboard-container {
       max-width: 1440px;
@@ -82,7 +215,7 @@
       display: grid;
       grid-template-columns: 280px 1fr 1fr;
       gap: 16px;
-      height: calc(100vh - 60px);
+      height: calc(100vh - 170px);
     }
 
     @media (max-width: 1024px) {
@@ -119,7 +252,24 @@
       padding-bottom: 6px;
     }
 
-    /* ミニカレンダー */
+    /* 動的ミニカレンダー */
+    .cal-header-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cal-nav-btn {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      border-radius: 4px;
+      padding: 2px 8px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    .cal-nav-btn:hover { background: var(--primary); color: #fff; }
+
     .cal-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -127,8 +277,9 @@
       font-size: 0.75rem;
       text-align: center;
     }
-    .cal-day-head { font-weight: bold; color: var(--text-muted); }
-    .cal-day { padding: 5px 0; border-radius: 4px; background: var(--bg-color); }
+    .cal-day-head { font-weight: bold; color: var(--text-muted); padding-bottom: 4px; }
+    .cal-day { padding: 5px 0; border-radius: 4px; background: var(--bg-color); color: var(--text-color); }
+    .cal-day.empty { background: transparent; }
     .cal-day.event { background: var(--primary); color: #fff; font-weight: bold; }
 
     /* 大会リスト */
@@ -156,7 +307,7 @@
     /* メモ欄 */
     .note-textarea {
       width: 100%;
-      height: 110px;
+      height: 100px;
       border: 1px solid var(--border-color);
       border-radius: 6px;
       padding: 8px;
@@ -278,6 +429,7 @@
 </head>
 <body>
 
+  <!-- ヘッダー -->
   <header>
     <div class="brand">
       <h1>卓球情報。</h1>
@@ -286,33 +438,82 @@
     <button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀️ モード切替</button>
   </header>
 
+  <!-- サイトタイトルの直下：横型メジャー大会ロードマップ図解バナー -->
+  <div class="roadmap-section">
+    <div class="roadmap-card">
+      <div class="roadmap-header">
+        <div class="roadmap-title">
+          <span>🇺🇸 ROAD TO LOS ANGELES 2028</span>
+          <span style="font-size:0.75rem; color:#94a3b8; font-weight:normal;">| 卓球主要大会ロードマップ</span>
+        </div>
+        <div class="roadmap-countdown-badge" id="banner-olympic-countdown">
+          ロス五輪まで あと --- 日
+        </div>
+      </div>
+      
+      <!-- 7つのマイルストーンステップ -->
+      <div class="roadmap-stepper">
+        <div class="step-item active">
+          <div class="step-node">1</div>
+          <div class="step-date">2026.10</div>
+          <div class="step-label">WTT China Smash</div>
+        </div>
+        <div class="step-item">
+          <div class="step-node">2</div>
+          <div class="step-date">2026.12</div>
+          <div class="step-label">WTT Finals</div>
+        </div>
+        <div class="step-item">
+          <div class="step-node">3</div>
+          <div class="step-date">2027.01</div>
+          <div class="step-label">全日本選手権</div>
+        </div>
+        <div class="step-item">
+          <div class="step-node">4</div>
+          <div class="step-date">2027.05</div>
+          <div class="step-label">世界卓球（個人）</div>
+        </div>
+        <div class="step-item">
+          <div class="step-node">5</div>
+          <div class="step-date">2028.01</div>
+          <div class="step-label">全日本（選考）</div>
+        </div>
+        <div class="step-item">
+          <div class="step-node">6</div>
+          <div class="step-date">2028.05</div>
+          <div class="step-label">世界卓球（団体）</div>
+        </div>
+        <div class="step-item gold">
+          <div class="step-node">🥇</div>
+          <div class="step-date" style="color:#fbbf24;">2028.07.14</div>
+          <div class="step-label">ロス五輪 開幕</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- メイン3カラムコンテンツ -->
   <div class="dashboard-container">
 
-    <!-- 左カラム：カレンダー & メモ -->
+    <!-- 左カラム：動的カレンダー・注目大会・メモ -->
     <div class="column">
       
-      <!-- カレンダー -->
+      <!-- 動的月切替カレンダー -->
       <div class="card">
         <div class="card-title">
           <span>🗓️ 大会カレンダー</span>
-          <span style="font-size:0.72rem; color:var(--text-muted);">10月</span>
+          <div class="cal-header-nav">
+            <button class="cal-nav-btn" onclick="moveMonth(-1)">◀</button>
+            <span id="cal-month-title" style="font-size:0.8rem; color:var(--primary); font-weight:bold;">2026年 10月</span>
+            <button class="cal-nav-btn" onclick="moveMonth(1)">▶</button>
+          </div>
         </div>
-        <div class="cal-grid">
-          <div class="cal-day-head">日</div><div class="cal-day-head">月</div><div class="cal-day-head">火</div>
-          <div class="cal-day-head">水</div><div class="cal-day-head">木</div><div class="cal-day-head">金</div>
-          <div class="cal-day-head">土</div>
-
-          <div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div>
-          <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div>
-          <div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div>
-          <div class="cal-day event" title="WTT China Smash">8</div><div class="cal-day event">9</div><div class="cal-day event">10</div><div class="cal-day">11</div>
-          <div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div>
-          <div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div>
-          <div class="cal-day event" title="Tリーグ公式戦">24</div><div class="cal-day event">25</div>
+        <div class="cal-grid" id="cal-grid-container">
+          <!-- JSで動的にカレンダーを生成 -->
         </div>
       </div>
 
-      <!-- 注目大会 -->
+      <!-- 直近の注目大会 -->
       <div class="card">
         <div class="card-title">
           <span>🏆 直近の注目大会</span>
@@ -411,14 +612,6 @@
             <div class="news-meta"><span class="badge badge-jp">卓球王国</span><span>8時間前</span></div>
             <a href="https://world-tt.com/" target="_blank" rel="noopener noreferrer" class="news-title">戸上隼輔のフォアドライブ技術「インパクトの強さと身体の使い方」 ↗</a>
           </div>
-          <div class="news-item">
-            <div class="news-meta"><span class="badge badge-jp">Rallys</span><span>10時間前</span></div>
-            <a href="https://rallys.online/" target="_blank" rel="noopener noreferrer" class="news-title">平野美宇、全日本社会人卓球選手権で圧巻のV達成「手応えを感じる大会になった」 ↗</a>
-          </div>
-          <div class="news-item">
-            <div class="news-meta"><span class="badge badge-jp">卓球王国</span><span>12時間前</span></div>
-            <a href="https://world-tt.com/" target="_blank" rel="noopener noreferrer" class="news-title">【ギア解説】最新テンションラバー徹底比較「粘着系 vs 高弾性テンション」 ↗</a>
-          </div>
         </div>
 
         <button class="btn btn-load-more" onclick="loadMoreDomestic()">▼ 過去の国内ニュースをさらに読み込む</button>
@@ -487,56 +680,6 @@
             </div>
           </div>
 
-          <div class="news-item">
-            <div class="news-meta"><span class="badge badge-global">🌍 WTT Official</span><span>3時間前</span></div>
-            <a href="https://www.worldtabletennis.com/news" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] 孫穎莎、北京スマッシュの女子シングルス第1シードに決定 ↗</a>
-            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
-            <div class="accordion-content">
-              <div><strong>原文:</strong> Sun Yingsha named top seed for China Smash 2026</div>
-              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> WTT China Smash 2026の組み合わせが発表され孫穎莎が本命シード。</div>
-            </div>
-          </div>
-
-          <div class="news-item">
-            <div class="news-meta"><span class="badge badge-global">🇺🇸 USATT</span><span>4時間前</span></div>
-            <a href="https://www.usatt.org/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] 全米卓球オープン、エントリー者数が過去最大規模に拡大 ↗</a>
-            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
-            <div class="accordion-content">
-              <div><strong>原文:</strong> US Open Table Tennis Championships sees record registrations</div>
-              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> アメリカ国内での卓球人気が高まり全米オープンへの参加者が急増。</div>
-            </div>
-          </div>
-
-          <div class="news-item">
-            <div class="news-meta"><span class="badge badge-global">🇫🇷 ActuPing</span><span>5時間前</span></div>
-            <a href="https://www.actuping.com/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] ルブラン兄弟、フランス国内選手権で圧倒的なパフォーマンスを披露 ↗</a>
-            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
-            <div class="accordion-content">
-              <div><strong>原文:</strong> Les frères Lebrun dominent le championnat de France</div>
-              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> フェリックスとアレクシのルブラン兄弟が快進撃を続け決勝進出を決めた。</div>
-            </div>
-          </div>
-
-          <div class="news-item">
-            <div class="news-meta"><span class="badge badge-global">🇬🇧 TT England</span><span>6時間前</span></div>
-            <a href="https://www.tabletennisengland.co.uk/" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] ピッチフォード、英シニアオープンを無敗で完全制覇 ↗</a>
-            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
-            <div class="accordion-content">
-              <div><strong>原文:</strong> Liam Pitchford claims Senior Open title in dominant fashion</div>
-              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> イギリスのエース・ピッチフォードが国内タイトルを獲得。</div>
-            </div>
-          </div>
-
-          <div class="news-item">
-            <div class="news-meta"><span class="badge badge-global">🇨🇳 乒乓世界</span><span>7時間前</span></div>
-            <a href="https://sports.sina.cn/others/pingpang" target="_blank" rel="noopener noreferrer" class="news-title">📌 [AI和訳] 中国ナショナルチーム、成都トレーニング基地にて秋季強化合宿を開始 ↗</a>
-            <span class="accordion-toggle" onclick="toggleAccordion(this)">▼ 原文 & AI要約を表示</span>
-            <div class="accordion-content">
-              <div><strong>原文:</strong> 国乒成都封闭集训正式开启，备战下半年重大赛事</div>
-              <div style="margin-top:4px; color:var(--text-muted);"><strong>AI要約:</strong> 今後の国際大会に向け、中国代表チームが成都で非公開の集中強化合宿を開始。</div>
-            </div>
-          </div>
-
         </div>
 
         <button class="btn btn-load-more" onclick="loadMoreGlobal()">▼ 過去の海外ニュースをさらに読み込む</button>
@@ -566,40 +709,119 @@
         : '▼ 原文 & AI要約を表示';
     }
 
-    // 3. マイメモ（LocalStorage保存・復元）
-    const noteTextarea = document.getElementById('user-note');
-    const saveStatus = document.getElementById('save-status');
+    // 3. ロス五輪自動カウントダウン計算
+    function updateOlympicCountdown() {
+      const olympicDate = new Date('2028-07-14T00:00:00');
+      const now = new Date();
+      const diffTime = olympicDate - now;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      const el = document.getElementById('banner-olympic-countdown');
+      if (el) {
+        el.textContent = `ロス五輪まで あと ${diffDays} 日`;
+      }
+    }
 
+    // 4. 動的月切替カレンダー描画
+    let currentYear = 2026;
+    let currentMonth = 10;
+
+    const eventDatesMap = {
+      '2026-10': [8, 9, 10, 24, 25],
+      '2026-11': [12, 13, 14],
+      '2026-12': [18, 19, 20],
+      '2027-01': [22, 23, 24, 25],
+      '2027-05': [15, 16, 17, 18, 19, 20, 21, 22],
+      '2028-07': [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+    };
+
+    function renderCalendar(year, month) {
+      const monthTitle = document.getElementById('cal-month-title');
+      const gridContainer = document.getElementById('cal-grid-container');
+      
+      monthTitle.textContent = `${year}年 ${month}月`;
+      gridContainer.innerHTML = '';
+
+      const daysOfWeek = ['日', '月', '火', '水', '木', '金', '土'];
+      daysOfWeek.forEach(d => {
+        const div = document.createElement('div');
+        div.className = 'cal-day-head';
+        div.textContent = d;
+        gridContainer.appendChild(div);
+      });
+
+      const firstDay = new Date(year, month - 1, 1).getDay();
+      const totalDays = new Date(year, month, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const div = document.createElement('div');
+        div.className = 'cal-day empty';
+        gridContainer.appendChild(div);
+      }
+
+      const key = `${year}-${String(month).padStart(2, '0')}`;
+      const activeEvents = eventDatesMap[key] || [];
+
+      for (let day = 1; day <= totalDays; day++) {
+        const div = document.createElement('div');
+        div.className = 'cal-day';
+        if (activeEvents.includes(day)) {
+          div.classList.add('event');
+          div.title = "大会開催日";
+        }
+        div.textContent = day;
+        gridContainer.appendChild(div);
+      }
+    }
+
+    function moveMonth(delta) {
+      currentMonth += delta;
+      if (currentMonth > 12) {
+        currentMonth = 1;
+        currentYear++;
+      } else if (currentMonth < 1) {
+        currentMonth = 12;
+        currentYear--;
+      }
+      renderCalendar(currentYear, currentMonth);
+    }
+
+    // 5. 初期化処理
     window.addEventListener('DOMContentLoaded', () => {
+      const noteTextarea = document.getElementById('user-note');
       const savedNote = localStorage.getItem('tt_info_user_note');
       if (savedNote) {
         noteTextarea.value = savedNote;
       }
-      // 最新JSONデータの自動ロードを試行
+      
+      renderCalendar(currentYear, currentMonth);
+      updateOlympicCountdown();
       loadLatestNewsFromJSON();
     });
 
     function saveNote() {
+      const noteTextarea = document.getElementById('user-note');
+      const saveStatus = document.getElementById('save-status');
       localStorage.setItem('tt_info_user_note', noteTextarea.value);
       saveStatus.style.opacity = '1';
       setTimeout(() => { saveStatus.style.opacity = '0'; }, 2000);
     }
 
     function clearNote() {
+      const noteTextarea = document.getElementById('user-note');
       if (confirm('メモをクリアしますか？')) {
         noteTextarea.value = '';
         localStorage.removeItem('tt_info_user_note');
       }
     }
 
-    // 4. 自動生成された data/news.json の動的読み込み処理
+    // 6. JSON自動読み込み処理
     async function loadLatestNewsFromJSON() {
       try {
         const res = await fetch('./data/news.json');
         if (!res.ok) return;
         const data = await res.json();
 
-        // 国内ニュースの更新
         if (data.domestic && data.domestic.length > 0) {
           const domesticList = document.getElementById('domestic-news-list');
           domesticList.innerHTML = '';
@@ -614,7 +836,6 @@
           });
         }
 
-        // 海外ニュース（AI翻訳済み）の更新
         if (data.global && data.global.length > 0) {
           const globalList = document.getElementById('global-news-list');
           globalList.innerHTML = '';
@@ -638,13 +859,11 @@
       }
     }
 
-    // 5. 過去ニュース読み込みボタン（フォールバック用）
     function loadMoreDomestic() {
       const list = document.getElementById('domestic-news-list');
       const pastItems = [
         { source: 'Rallys', time: '1日前', url: 'https://rallys.online/', title: '【卓球ギア】粘着テンションの最新トレンドとトップ選手の愛用ギア一覧 ↗' },
-        { source: '卓球王国', time: '1日前', url: 'https://world-tt.com/', title: '全日本マスターズ予選、全国の強豪ベテラン選手が集結 ↗' },
-        { source: 'JTTA公式', time: '2日前', url: 'https://jtta.or.jp/', title: '【広報】卓球競技におけるアンチ・ドーピング講習会の開催について ↗' }
+        { source: '卓球王国', time: '1日前', url: 'https://world-tt.com/', title: '全日本マスターズ予選、全国の強豪ベテラン選手が集結 ↗' }
       ];
 
       pastItems.forEach(item => {
@@ -661,8 +880,7 @@
     function loadMoreGlobal() {
       const list = document.getElementById('global-news-list');
       const pastItems = [
-        { source: '🇰🇷 NAVER Sports', time: '1日前', url: 'https://m.sports.naver.com/', title: '📌 [AI和訳] アン・ジェヒョン、韓国国内オープンで優勝し代表選考レース一歩リード ↗', orig: '안재현, 국내 오픈 대회 우승으로 대표선발전 우位', summary: '男子卓球の安宰賢が鋭いチキータとフォアドライブで優勝。' },
-        { source: '🇸🇪 Pingis Sweden', time: '1日前', url: 'https://www.pingis.se/', title: '📌 [AI和訳] カールソン＆シェルベリ組、世界選手権ダブルス出場を表明 ↗', orig: 'Karlsson och Källberg siktar mot VM-guld i dubbel', summary: 'スウェーデンの名ダブルスコンビが次期世界選手権での金メダル獲得を宣言。' }
+        { source: '🇰🇷 NAVER Sports', time: '1日前', url: 'https://m.sports.naver.com/', title: '📌 [AI和訳] アン・ジェヒョン、韓国国内オープンで優勝し代表選考レース一歩リード ↗', orig: '안재현, 국내 오픈 대회 우승', summary: '男子卓球の安宰賢が鋭いチキータとフォアドライブで優勝。' }
       ];
 
       pastItems.forEach(item => {
