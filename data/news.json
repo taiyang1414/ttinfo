@@ -51,11 +51,51 @@
   ],
   "global": [
     {
-      "source": "WTT Official",
-      "title": "📌 World Table Tennis Latest Updates",
-      "url": "https://www.worldtabletennis.com/news",
-      "orig": "World Table Tennis Latest Updates",
-      "summary": "WTT公式の国際大会最新ニュース一覧",
+      "source": "🇨🇳 中国ニュース",
+      "title": "📌 亚运会丨林诗栋夺得乒乓球男单冠军",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNWlNtbGpnNFcyZlVFWEtaR3ZyTW1zb3psTHdWbXFsVnlTUlRKcGNDOURwdHVBbnJ4VmIyZXpPU1ltdWM0VWVsR3ltTVE4M1o5SzJEMHlXZXNKZjFaN0pUZldFajlyRF82THZfSTNETGNlaHRfLThTMHU4TTFCUXQ2Tg?oc=5",
+      "orig": "亚运会丨林诗栋夺得乒乓球男单冠军 - 新华网",
+      "summary": "海外主要メディアの最新卓球ニュースです。",
+      "time": "最新"
+    },
+    {
+      "source": "🇨🇳 中国ニュース",
+      "title": "📌 马龙，一款你永远可以信任的中国乒乓球团粉",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBjRThzY0p0UFRVanRia3VLblRjbjJNNlN5RTU2bWdPeW43WGNoRjJOSngzalpSaHBwWUtsNWQ5YmszNzhuSnN1RUx0cVZOWHY2Sl9SWGRzZFFrV2VQU0VRdHA0U205VDhMMW5tNEFiVTBSRlU?oc=5",
+      "orig": "马龙，一款你永远可以信任的中国乒乓球团粉 - 手机新浪网",
+      "summary": "海外主要メディアの最新卓球ニュースです。",
+      "time": "最新"
+    },
+    {
+      "source": "🇨🇳 中国ニュース",
+      "title": "📌 伊朗乒乓球“黑马”少年法拉吉：心无旁骛迎接每个对手",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE56SEl4ZzlsTE5za0lKYVpwTXUwMl9pRk1CM2J3SnpXVFJsNmNiMWgxdVZpckxGb2tGQmpGM1gzRmZYUE1UdFBZRzhJUUFIMW9oUGJUT2N1THF4LTdieTN0cFVHR19qS2NJ?oc=5",
+      "orig": "伊朗乒乓球“黑马”少年法拉吉：心无旁骛迎接每个对手 - chinanews.com.cn",
+      "summary": "海外主要メディアの最新卓球ニュースです。",
+      "time": "最新"
+    },
+    {
+      "source": "🇰🇷 韓国ニュース",
+      "title": "📌 장한재·조대성 ‘리턴 매치’…프로탁구 KTTP 4차 대회 8강 압축",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQSFdGd1lnWXY4TWpPUENwalkzQ3I5SGd4VjFybXZQaTBxdmc1OHJXMWhtUTVSWWpxMGtTa2kzUEF1d0hnWVc4VVRjRmM1QWVCNHNaNHVBV21SVnRVNEZNMkZ5dUVIODZWT2lmTlBnU0pyb05UWVEzbnlSOHI5WWtQUQ?oc=5",
+      "orig": "장한재·조대성 ‘리턴 매치’…프로탁구 KTTP 4차 대회 8강 압축 - edaily.co.kr",
+      "summary": "海外主要メディアの最新卓球ニュースです。",
+      "time": "最新"
+    },
+    {
+      "source": "🇰🇷 韓国ニュース",
+      "title": "📌 \"이젠 탁구가 즐겁지 않다\" 中 세계 1위 충격 고백...극성팬에 지쳤나 \"정말 역겹다\" 자국도 분노",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeTFKcU1ncW16dHk0ME40RnN6RkVGZzNfUm9OWGxzdVAzNW55ZzVXVjFXQ0NGSEc1Z1BNc1FQVVo0MkdtT3NlbFlHRUNPQjRmNFZmc0hLb0tQVlg2NEhTd3hFTHg5Z1JYaGpxMkt0Q3kxT3N0MWNpNlh6MGxta0lUX1VR?oc=5",
+      "orig": "\"이젠 탁구가 즐겁지 않다\" 中 세계 1위 충격 고백...극성팬에 지쳤나 \"정말 역겹다\" 자국도 분노 - sportalkorea.com",
+      "summary": "海外主要メディアの最新卓球ニュースです。",
+      "time": "最新"
+    },
+    {
+      "source": "🇰🇷 韓国ニュース",
+      "title": "📌 린스둥, 왕추친 꺾고 아시안게임 탁구 남자 단식 우승",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9QeS1rcDlHOXdkNExVSWZORkFla3B5VXZhWllfTDRQOTlIY2RMaDJidmtHcm9zeFYzWlZJWnJWQkNpemlhak10ZG5DNlBKbklqNUFoblhaWHJGUGU5MEVTWWRab0RWUU15OFE?oc=5",
+      "orig": "린스둥, 왕추친 꺾고 아시안게임 탁구 남자 단식 우승 - 인민망",
+      "summary": "海外主要メディアの最新卓球ニュースです。",
       "time": "最新"
     }
   ]
