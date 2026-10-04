@@ -309,6 +309,18 @@
   "domestic": [
     {
       "source": "Rallys",
+      "title": "第12回Reposウィークデーマッチ(19:00開始、要項必読)",
+      "url": "https://rallys.online/i2uevent/i2u-754016ac201d074a65/",
+      "time": "最新"
+    },
+    {
+      "source": "Rallys",
+      "title": "第８回Reposダブルスマッチ(要項必読)",
+      "url": "https://rallys.online/i2uevent/i2u-511316ac203832fe05/",
+      "time": "最新"
+    },
+    {
+      "source": "Rallys",
       "title": "TAMA TABLE CIRCUIT 2026",
       "url": "https://rallys.online/i2uevent/i2u-377946aa39e4d08343/",
       "time": "最新"
@@ -338,47 +350,35 @@
       "time": "最新"
     },
     {
-      "source": "Rallys",
-      "title": "【卓球動画】『京大生の卓球偏差値上げてみた』第1章：関西1部で勝利目指す編完結！東山高校・宮木先生が語る“4年生の軌跡”　新チーム指導の第2章もスタート！",
-      "url": "https://rallys.online/movie/2610kyodai-higashiyama01/",
-      "time": "最新"
-    },
-    {
       "source": "卓球王国",
-      "title": "T.T彩たま、日本生命がホームで勝利。10月3日のTリーグ試合結果",
-      "url": "https://world-tt.com/blog/news/archives/381784",
-      "time": "最新"
-    },
-    {
-      "source": "卓球王国",
-      "title": "TT彩たま、ホーム3連戦の初日は静岡に勝利。10月2日のTリーグ結果",
-      "url": "https://world-tt.com/blog/news/archives/381696",
+      "title": "琉球はビクトリーマッチを制し勝ち星、日本生命はホームで2連勝。10月4日のTリーグ試合結果",
+      "url": "https://world-tt.com/blog/news/archives/381860",
       "time": "最新"
     }
   ],
   "global": [
     {
       "source": "🇨🇳 中国",
-      "title": "📌 [AI和訳] やっぱり、キングドンドンですよ〜卓球🏓ファンジェンドン",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9LV3FUcUtHbWJjdklTalRqUkQ4UEd1MVlqQVp6cjNacnc0TTN0bVJwakdHSVdtemg4UnZ2LWl3MlVfTHdhLVBYcTFUY0RaNERyS1JzX1lrVnpKSzdTTnM4di1nbzM4MG5hd3VvclJ3cmg4YW8?oc=5",
-      "orig": "果然是咚咚大王~ 乒乓球🏓 樊振东 - 手机新浪网",
-      "summary": "【🇨🇳 中国速報】「やっぱり、キングドンドンですよ〜卓球🏓ファンジェンドン」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] Zhendong をクリックしてください~卓球🏓 Fan Zhendong",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1JZXJVcEFyVFpITjNyMHR4WXhwdFNuUFZFaV9PcjVUejllR0JDVFBTYnRVTDFHa0hQRGR0SWNSbWk1dlRTSExWbVB5Q2lrek5VVFlJX0t0UXIwNGQ0TnhobjlJUUNTZWxFVWs4WG5qYjNGbFE?oc=5",
+      "orig": "点啊振东~ 乒乓球🏓 樊振东 - 手机新浪网",
+      "summary": "【🇨🇳 中国速報】「Zhendong をクリックしてください~卓球🏓 Fan Zhendong」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
       "source": "🇨🇳 中国",
       "title": "📌 [AI和訳] 第20回ハイテクゾーン「開城杯」卓球グランプリ開幕",
       "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9ZeEdtd1lxYWo5UVpacWNLZVJkTFFmNDdoWWhUaTNRV3RmZ0NOLWo5NWJ0SWVldkdMZ2thUGxmUVNoZ2J1T2txRTUwQ29ibE1TQXE3LTY5ZUlLSTVHTjJvNEVhM3VFNGlBVDRyMWR2cVJhZVNMUml4YXRR?oc=5",
-      "orig": "第20届高新区“开诚杯”乒乓球大奖赛开赛 - tangshan.huanbohainews.com.cn",
+      "orig": "第20届高新区“开诚杯”乒乓球大奖赛开赛 - 环渤海新闻网",
       "summary": "【🇨🇳 中国速報】「第20回ハイテクゾーン「開城杯」卓球グランプリ開幕」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
       "source": "🇨🇳 中国",
-      "title": "📌 [AI和訳] 2026年湖北省青少年卓球Uシリーズポイントトーナメント第2戦終了",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFA0MVc3cFFoakVqTEg0YmJUazN0ekRRbF8xQkI5bm1WeHpKWlNVQVJZaVVQZ0ZnTjNiX2NaWUZiVU42LURkSHRwNzVqc2NVQW1BeHVCZFZIdTV6czNWQm52Wmln?oc=5",
-      "orig": "2026年湖北省青少年乒乓球U系列积分赛第二站落幕 - 长江网",
-      "summary": "【🇨🇳 中国速報】「2026年湖北省青少年卓球Uシリーズポイントトーナメント第2戦終了」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] 福建省と台湾の卓球選手がボールを使って友人と出会い、社会的交流を促進",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5iSDB0QmFGOXhHNmhrZ25OV3ZkN1pYcW1rSHVYdXcyc29IZ3ZTc2hwMnUzNjVwbmNveWRHRXpjb0ZuVjRUbmRQYjY5UWR4LTRGdjQ0UkZzSWhKTF9qNW5OOHlVa01TbmRnekh0NlFHMnlHelAxaVRLTQ?oc=5",
+      "orig": "闽台乒乓球选手以球会友促交融 - 新浪财经",
+      "summary": "【🇨🇳 中国速報】「福建省と台湾の卓球選手がボールを使って友人と出会い、社会的交流を促進」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
@@ -391,18 +391,18 @@
     },
     {
       "source": "🇰🇷 韓国",
-      "title": "📌 [AI和訳] 「美しい美女選手」 日熱狂卓球天使、22歳で引退…芸能企画会社契約→俳優に転向する",
-      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFAyN242ZThybXZTT29LVEV3VEFpVHBqM1VuVzJVNUNoUnVfM0xxQUJIQm5fWUh6RFEtTjNJeTRBeENXLUpJSFhMeW9fRExrUU0?oc=5",
-      "orig": "\"아름다운 미녀 선수\" 日 열광 탁구 천사, 22세에 은퇴…연예 기획사 계약→배우로 전향한다 - v.daum.net",
-      "summary": "【🇰🇷 韓国速報】「「美しい美女選手」 日熱狂卓球天使、22歳で引退…芸能企画会社契約→俳優に転向する」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] チョ・デソン、チャン・ハンジェに雪浴…プロ卓球KTTP男女絶食4強確定",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPczlZUllEVG40RXc1QTR5eWFQQTlFQVNsLUtqWVUwcVd4N050T2dfWnV0bmlFR2xIZ185UjVQR2JNZkJMSUlhLVJnc053MXd6V2tKUkdLTGtsTHR3XzhNeTRyUmRaZGFrQWk0YzI1WmxFVTFyaU5qMVNZWVlYRlZ3Zg?oc=5",
+      "orig": "조대성, 장한재에 설욕…프로탁구 KTTP 남녀 단식 4강 확정 - edaily.co.kr",
+      "summary": "【🇰🇷 韓国速報】「チョ・デソン、チャン・ハンジェに雪浴…プロ卓球KTTP男女絶食4強確定」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
       "source": "🇰🇷 韓国",
-      "title": "📌 [AI和訳] クォン・スンウのテニス、シン・ユビンの卓球「ノーゴールド」不振…アン・セヨンのバドミントンだけ笑った[アジアゲーム韓国ラケット種目決算]",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE41dTFmUHVLdXBpYnJqVGs3NWlIMmNJSl9IMk5XTktOcE81anJDS0VSYkhUVk9MdlRrbWI1ZGRGNXFLOWx2Z25kUVM5WVdjUk5DUXZfVTNmOXJiVWs2d1owX2RXVUpCOWVqTEE?oc=5",
-      "orig": "권순우의 테니스, 신유빈의 탁구 ‘노골드’ 부진…안세영의 배드민턴만 웃었다 [아시안게임 한국 라켓 종목 결산] - 테니스코리아",
-      "summary": "【🇰🇷 韓国速報】「クォン・スンウのテニス、シン・ユビンの卓球「ノーゴールド」不振…アン・セヨンのバドミントンだけ笑った[アジアゲーム韓国ラケット種目決算]」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] チェ・ヒョジュ、連続優勝挑戦…プロ卓球リーグシリーズ4、4強対進票完成",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE53cmVYcV9RdXZKRmgyYTVOM2NzNThOLUFyQS1Oano5ck05aXlxbzU2NE1lRTFZd1g0NGlYZThESGlUejFramI1RkJhNGREUTNDdThnZ3hIVnl6ZG5uWHNjZXVB?oc=5",
+      "orig": "최효주, 연속 우승 도전…프로탁구리그 시리즈4, 4강 대진표 완성 - 스포츠월드",
+      "summary": "【🇰🇷 韓国速報】「チェ・ヒョジュ、連続優勝挑戦…プロ卓球リーグシリーズ4、4強対進票完成」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     }
   ]
