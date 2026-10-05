@@ -60,18 +60,25 @@ def is_google_boilerplate(text):
 def translate_to_japanese(text):
     if not text or not isinstance(text, str):
         return text if isinstance(text, str) else ""
+    text_str = text.strip()
+    if not text_str:
+        return ""
     try:
-        url = f"https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ja&dt=t&q={urllib.parse.quote(text)}"
+        url = f"https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ja&dt=t&q={urllib.parse.quote(text_str)}"
         req = urllib.request.Request(url, headers=HEADERS)
-        with urllib.request.urlopen(req, timeout=5) as response:
+        with urllib.request.urlopen(req, timeout=6) as response:
             result = json.loads(response.read().decode('utf-8'))
-            if result and isinstance(result, list) and len(result) > 0 and result:
-                translated = "".join([item for item in result if item and isinstance(item, list) and len(item) > 0 and isinstance(item, str)])
-                return translated if translated else text
-            return text
+            if result and isinstance(result, list) and len(result) > 0 and isinstance(result[0], list):
+                chunks = []
+                for item in result[0]:
+                    if isinstance(item, list) and len(item) > 0 and isinstance(item[0], str):
+                        chunks.append(item[0])
+                translated = "".join(chunks)
+                return translated if translated else text_str
+            return text_str
     except Exception as e:
         print(f"Translation error: {e}")
-        return text
+        return text_str
 
 def get_article_summary(link, default_title):
     if not link or not isinstance(link, str):
