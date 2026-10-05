@@ -450,10 +450,10 @@
   <!-- ヘッダー -->
   <header>
     <div class="brand">
-      <h1>卓球情報。</h1>
+      <h1>🏓 卓球情報。</h1>
       <span style="font-size:0.7rem; background:#334155; padding:2px 6px; border-radius:10px;">β</span>
     </div>
-    <button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀️️ モード切替</button>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀️ モード切替</button>
   </header>
 
   <!-- ロードマップバナー -->
@@ -597,28 +597,28 @@
     <div class="column">
       <div class="card">
         <div class="card-title">
-          <span>📰 国内ニュースフィード</span>
-          <span style="font-size:0.72rem; color:var(--text-muted);">Rallys / 卓球王国 / JTTA</span>
+          <span>📰 国内主要ニュースフィード</span>
+          <span style="font-size:0.72rem; color:var(--text-muted);">主要選手動向 / Yahoo!ニュース参考</span>
         </div>
         <div class="news-card-featured" id="featured-news-card">
-          <div class="featured-img">🏓 注目記事アイキャッチ画像</div>
+          <div class="featured-img">🏓 注目選手・大会速報</div>
           <div class="featured-content">
             <div class="news-meta">
-              <span class="badge badge-jp" id="featured-badge">卓球王国</span>
+              <span class="badge badge-jp" id="featured-badge">主要選手ニュース</span>
               <span id="featured-time">最新</span>
             </div>
-            <a href="https://world-tt.com/blog/news/" id="featured-link" target="_blank" rel="noopener noreferrer" class="news-title" style="font-size:1rem; display:block; margin-top:4px;">
+            <a href="https://sports.yahoo.co.jp/list/news/tabletennis?genre=tabletennis" id="featured-link" target="_blank" rel="noopener noreferrer" class="news-title" style="font-size:1rem; display:block; margin-top:4px;">
               最新ニュースを取得中... ↗
             </a>
           </div>
         </div>
         <div id="domestic-news-list">
           <div class="news-item">
-            <div class="news-meta"><span class="badge badge-jp">Rallys</span><span>最新</span></div>
-            <a href="https://rallys.online/" target="_blank" rel="noopener noreferrer" class="news-title">最新ニュースを取得中... ↗</a>
+            <div class="news-meta"><span class="badge badge-jp">主要選手</span><span>最新</span></div>
+            <a href="https://sports.yahoo.co.jp/list/news/tabletennis?genre=tabletennis" target="_blank" rel="noopener noreferrer" class="news-title">最新ニュースを取得中... ↗</a>
           </div>
         </div>
-        <button class="btn btn-load-more" onclick="loadMoreDomestic()">▼ 過去の国内ニュースをさらに読み込む</button>
+        <button class="btn btn-load-more" onclick="loadMoreDomestic()">▼ Yahoo!卓球ニュース / 過去ニュースをさらに読み込む</button>
       </div>
     </div>
 
@@ -688,12 +688,12 @@
     let currentYear = 2026;
     let currentMonth = 10;
     const eventDatesMap = {
-      '2026-10': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 24, 25],
-      '2026-11': [14, 15, 28, 29],
-      '2026-12': [10, 11, 12, 13],
-      '2027-01': [20, 21, 22, 23, 24, 25, 26],
-      '2027-05': [15, 16, 17, 18, 19, 20, 21, 22, 23],
-      '2028-07': [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+      '2026-10':,
+      '2026-11':,
+      '2026-12':,
+      '2027-01':,
+      '2027-05':,
+      '2028-07':
     };
 
     function renderCalendar(year, month) {
@@ -740,7 +740,6 @@
       renderCalendar(currentYear, currentMonth);
     }
 
-    // デフォルト・フォールバック用世界ランキング TOP 25 データ
     const fallbackRankings = {
       updated: "2026年第40週",
       men: [
@@ -926,7 +925,8 @@
 
     function loadMoreDomestic() {
       const list = document.getElementById('domestic-news-list');
-      [{ source: 'Rallys', time: '公式', url: 'https://rallys.online/', title: 'Rallys 最新ニュース一覧 ↗' },
+      [{ source: 'Yahoo!卓球', time: '公式', url: 'https://sports.yahoo.co.jp/list/news/tabletennis?genre=tabletennis', title: 'Yahoo!ニュース 卓球一覧 ↗' },
+       { source: 'Rallys', time: '公式', url: 'https://rallys.online/', title: 'Rallys 最新ニュース一覧 ↗' },
        { source: '卓球王国', time: '公式', url: 'https://world-tt.com/blog/news/', title: '卓球王国 最新ニュース一覧 ↗' }
       ].forEach(item => {
         const div = document.createElement('div');
