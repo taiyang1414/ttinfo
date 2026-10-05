@@ -10,31 +10,35 @@ HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 }
 
-# セール・ギア関連（絶対除外）
+# 除外キーワード（用具、ショップ、一般技術指導、ローカル教室など）
 STRICT_EXCLUDE = [
     "セール", "限定", "特価", "割引", "ラバー", "ラケット", "ギア", "シューズ", 
-    "新発売", "ショップ", "入荷", "試打", "レビュー", "比較"
+    "新発売", "ショップ", "入荷", "試打", "レビュー", "比較", "打ち方", "コツ",
+    "レッスン", "卓球場", "初心者", "教室"
 ]
 
-# ジュニア・育成系キーワード（※バンビは除外対象から外す）
-JUNIOR_KEYWORDS = ["U12", "U-12", "U15", "U-15", "ホープス", "カブ", "小学生", "I2U"]
-
-# 主要大会・重要結果を示すキーワード
-MAJOR_RESULT_KEYWORDS = ["全日本", "全国", "優勝", "決定", "日本一", "決勝", "代表", "メダル", "王者", "制覇", "バンビ"]
+# 主要選手・主要大会キーワード（優先取得）
+MAJOR_KEYWORDS = [
+    "張本智和", "張本美和", "早田ひな", "松島輝空", "平野美宇", "伊藤美誠", 
+    "戸上隼輔", "大藤沙月", "木原美悠", "篠塚大登", "宇田幸矢", "田中佑汰",
+    "佐藤瞳", "橋本帆乃香", "長﨑美柚", "日本代表", "WTT", "Tリーグ", "全日本", 
+    "世界卓球", "優勝", "決勝", "メダル", "代表", "選考", "王楚欽", "孫穎莎"
+]
 
 def is_excluded(title):
     if not isinstance(title, str):
         return False
     title_upper = title.upper()
-    if any(k.upper() in title_upper for k in STRICT_EXCLUDE):
-        return True
-    if "バンビ" in title or "BAMBI" in title_upper:
-        return False
-    if any(k.upper() in title_upper for k in JUNIOR_KEYWORDS):
-        if any(m in title for m in MAJOR_RESULT_KEYWORDS):
-            return False
-        return True
-    return False
+    return any(k.upper() in title_upper for k in STRICT_EXCLUDE)
+
+def calculate_priority_score(title):
+    if not isinstance(title, str):
+        return 0
+    score = 0
+    for k in MAJOR_KEYWORDS:
+        if k in title:
+            score += 10
+    return score
 
 def clean_html(raw_html):
     if not raw_html or not isinstance(raw_html, str):
@@ -61,8 +65,8 @@ def translate_to_japanese(text):
         req = urllib.request.Request(url, headers=HEADERS)
         with urllib.request.urlopen(req, timeout=5) as response:
             result = json.loads(response.read().decode('utf-8'))
-            if result and isinstance(result, list) and len(result) > 0 and result[0]:
-                translated = "".join([item[0] for item in result[0] if item and isinstance(item, list) and len(item) > 0 and isinstance(item[0], str)])
+            if result and isinstance(result, list) and len(result) > 0 and result:
+                translated = "".join([item for item in result if item and isinstance(item, list) and len(item) > 0 and isinstance(item, str)])
                 return translated if translated else text
             return text
     except Exception as e:
@@ -103,14 +107,17 @@ def fetch_feed(url):
         return None
 
 def main():
-    domestic_news = []
+    raw_domestic_candidates = []
     global_news = []
 
-    # --- 1. 国内ニュース取得 ---
+    # --- 1. 国内主要ニュース取得 (主要選手・代表動向優先クエリ) ---
+    major_player_query = '卓球 (張本 OR 松島輝空 OR 早田ひな OR 平野美宇 OR 伊藤美誠 OR 戸上隼輔 OR 大藤沙月 OR 木原美悠 OR 篠塚大登 OR 日本代表 OR WTT OR Tリーグ)'
+    encoded_query = urllib.parse.quote(major_player_query)
+    
     domestic_sources = [
+        {"name": "主要選手ニュース", "url": f"https://news.google.com/rss/search?q={encoded_query}&hl=ja&gl=JP&ceid=JP:ja"},
         {"name": "Rallys", "url": "https://rallys.online/feed/"},
-        {"name": "卓球王国", "url": "https://world-tt.com/blog/news/feed/"},
-        {"name": "選手ニュース", "url": "https://news.google.com/rss/search?q=%E5%8D%93%E7%90%83+%E2%80%9C%E9%81%B8%E6%89%8B%E2%80%9D+OR+%E2%80%9C%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%93%E3%83%A5%E3%83%BC%E2%80%9D&hl=ja&gl=JP&ceid=JP:ja"}
+        {"name": "卓球王国", "url": "https://world-tt.com/blog/news/feed/"}
     ]
 
     for src in domestic_sources:
@@ -121,18 +128,39 @@ def main():
                 if is_excluded(title):
                     continue
                 
-                domestic_news.append({
+                score = calculate_priority_score(title)
+                if src["name"] == "主要選手ニュース":
+                    score += 15
+
+                raw_domestic_candidates.append({
                     "source": src["name"],
                     "title": title,
                     "url": entry.link if hasattr(entry, 'link') and isinstance(entry.link, str) else '',
+                    "score": score,
                     "time": "最新"
                 })
-                if len(domestic_news) >= 8:
-                    break
-            if len(domestic_news) >= 8:
-                break
 
-    # --- 2. 海外ニュース取得 ＆ AI自動要約 (Google定型文自動排除) ---
+    # 重複除外 ＆ 優先度スコア順にソート
+    seen_titles = set()
+    domestic_news = []
+    raw_domestic_candidates.sort(key=lambda x: x["score"], reverse=True)
+
+    for item in raw_domestic_candidates:
+        short_title = item["title"][:20]
+        if short_title in seen_titles:
+            continue
+        seen_titles.add(short_title)
+
+        domestic_news.append({
+            "source": item["source"],
+            "title": item["title"],
+            "url": item["url"],
+            "time": item["time"]
+        })
+        if len(domestic_news) >= 8:
+            break
+
+    # --- 2. 海外ニュース取得 ＆ AI自動要約 ---
     global_sources = [
         {"name": "🇨🇳 中国", "url": "https://news.google.com/rss/search?q=%E4%B9%93%E4%B9%93%E7%90%83&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"},
         {"name": "🇰🇷 韓国", "url": "https://news.google.com/rss/search?q=%ED%83%81%EA%B5%AC&hl=ko&gl=KR&ceid=KR:ko"},
@@ -174,7 +202,7 @@ def main():
                     "time": "最新"
                 })
 
-    # --- 3. 最新ITTF世界ランキング TOP25 (海外強豪＋日本選手網羅) ---
+    # --- 3. 最新ITTF世界ランキング TOP25 ---
     rankings_data = {
         "updated": "2026年第40週",
         "men": [
@@ -243,7 +271,7 @@ def main():
     with open("data/news.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
 
-    print(f"Successfully generated news.json with Top 25 Rankings (Domestic: {len(domestic_news)}, Global: {len(global_news)})")
+    print(f"Successfully generated news.json with Top 25 Rankings & Major Player News (Domestic: {len(domestic_news)}, Global: {len(global_news)})")
 
 if __name__ == "__main__":
     main()
