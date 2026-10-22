@@ -315,8 +315,14 @@
     },
     {
       "source": "主要選手ニュース",
-      "title": "【卓球】日本女子が２年ぶり金メダル王手 早田ひな、張本美和、大藤沙月で台湾に１ゲームも落とさず快勝 決勝は中国または韓国戦 - スポーツ報知",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBMdEhhQWg1NTB0MEozWjFhdnotN1dSalJzTTZtUFVZazY4Y2FNU1hySUJOTkZNN0ZfdUxsOVRGZHVCWlhLMjJOM1pZUTg4QlBpSG9VTWViYVV5THdhaXJISk5n?oc=5",
+      "title": "【卓球】日本女子団体、橋本帆乃香で中国に先勝も、張本美和、早田ひなで連敗 ２年ぶり金メダルへ崖っぷち…アジア選手権決勝 - スポーツ報知",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9RenpVZlFxUllGdjNWby1HU19ITGNLcXBZbFVFS1MyRUhicEgxakxvQkdmX24zbDNvVmdmdkU5YXlDdEU4S3ZPTE5KSDJGcWtEWFF2aHZVN3ZJYy0xMmh2REd3?oc=5",
+      "time": "最新"
+    },
+    {
+      "source": "主要選手ニュース",
+      "title": "【卓球】日本女子が２年ぶり金メダル王手 早田ひな、張本美和、大藤沙月で台湾に１ゲームも落とさず快勝 決勝は中国または韓国戦 - スポーツブル",
+      "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBHalJFZ2hFZEExTlFkVE0zbnFUbGhzNnd1V2loREE1djFvLTdnZVJ6cW93NTFjRTdCWnV5R1IyQ3lXTWRuMnR3?oc=5",
       "time": "最新"
     },
     {
@@ -339,12 +345,6 @@
     },
     {
       "source": "主要選手ニュース",
-      "title": "松島輝空が3週連続世界1位、張本智和は3位をキープ 王楚欽は5位で上位変動なし、田中佑汰が74位に浮上｜卓球男子世界ランキング（2026年第43週） - ｄメニューニュース",
-      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFB1TndkM3NrMEF0eUVHb2VmQzVYYm9ZLUNrM2o3MERzVzg4dUFIdDFROGtLNW8xaHhaX0FvSlAyYTREeWR5WVltNzVDVWU5WG9hNHM0cExYckR1RXdSWVZ1d2J0WEJnVTIxdDhpcG9lTGFYdzBmaGc?oc=5",
-      "time": "最新"
-    },
-    {
-      "source": "主要選手ニュース",
       "title": "松島輝空、張本美和らが選出 橋本帆乃香は初の代表入り＜卓球・混合団体ワールドカップ2026＞ - 卓球メディア｜Rallys",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBsUGFETXFQMTFHbXpDeFV3aURHZjNTNWdUVHF5VmpXbGZUcjNoQnBNcVpjZVBjbjZnSHhSMUJKRmdNUXJ5aXJKd1BOYVpVMWN5X1hUcTltU3NyT25YNkljZHpTeldjSmFoeEQwV2luODdvdw?oc=5",
       "time": "最新"
@@ -359,50 +359,50 @@
   "global": [
     {
       "source": "🇨🇳 中国",
-      "title": "📌 [AI和訳] アジア卓球選手権女子団体準々決勝：中国がタイに勝利",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOTzZrTE9MdEFwN3A2OUxta21VXzJ5eU1GMXAxLUFSdGxjb3JiWWg4V1NuTGFCS3RrNFluY2Q2UC1fdDR2Q2JVT3I1UFQ4aDNoZ0VfSDRvMTVJeUFkbjJtQ3dJWlVnWU4xZFlxTGZlaTVLZFZ4WmhTckkyaGMtVEFCcQ?oc=5",
-      "orig": "乒乓球亚锦赛女团四分之一决赛：中国队胜泰国队 - 新华网",
-      "summary": "【🇨🇳 中国速報】「アジア卓球選手権女子団体準々決勝：中国がタイに勝利」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] アジア卓球選手権大会、卓球ナショナルチームの男女チームがともに決勝に進出",
+      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFAxRkVGalFyYnRadE9IdjBPNzhERjV3WDlZVnpqMlo3TnMyZzVGaWVBWDJ4THdpX0p5alR4QXp0Ukt2Z3ZMT0ljUlVYMWstNjFFejJzeXpuZw?oc=5",
+      "orig": "国乒男团、女团双双晋级乒乓球亚锦赛团体决赛 - view.inews.qq.com",
+      "summary": "【🇨🇳 中国速報】「アジア卓球選手権大会、卓球ナショナルチームの男女チームがともに決勝に進出」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
       "source": "🇨🇳 中国",
-      "title": "📌 [AI和訳] 2026年アジア卓球選手権：中国チームエントリーリスト、スケジュール、結果",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPSGhzVXE0N0N5WTVMMXMybFoxUE9wLVluakF6Rm5MSVkxQWtpU0o5TW9vdGxtZ1J5eHJ4UEt0TmdhVDU4Q0g0MmZUOGJZTTY5aTZ4cGx3YUsxM3FZQVhTZXp0MktNa3QxQldzVmpKQXRfSVU1UFVKQUwwVkQ4NFFEdXoxcU10a0FYV1NwOVpBR1RscklXMGNXbDF5cEJhckRoamlYUGoxTmpndw?oc=5",
-      "orig": "2026年乒乓球亚锦赛：中国队参赛名单、赛程与赛果 - www.olympics.com",
-      "summary": "【🇨🇳 中国速報】「2026年アジア卓球選手権：中国チームエントリーリスト、スケジュール、結果」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] 【卓球】アジア卓球選手権大会 女子団体準々決勝 中国－タイ",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE12d1NwOU9EeW14bVRwbkE4dXpDZUN4ZGhJdW1WTUdrQlU4OWdGRUUtNnJvR1RGdGxNaEZpa29mcDQ3a012UUJCNFdtTEgzNWFzSnZranV5dk5Gb1JJc1hjanFING5ZYzBZYUJZUFRtbEc1V0tFWlhNYU5wZw?oc=5",
+      "orig": "[乒乓球]亚洲乒乓球锦标赛 女团1/4决赛 中国-泰国 - 央视体育",
+      "summary": "【🇨🇳 中国速報】「【卓球】アジア卓球選手権大会 女子団体準々決勝 中国－タイ」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
       "source": "🇨🇳 中国",
-      "title": "📌 [AI和訳] 高区チームは威海国家体育大会の卓球競技で男子団体優勝、女子団体準優勝を果たした。",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9fb1Q4TkxpT196ZEQ0WGZIOTZ5WUxKM2FsalpuX3Y3SS1lemNueEh0X2NDY3pSN3pleFJmYk0tbk1aYkJieWFGU2hZSnQxV3M5MjEyc2E4NzRyX0NMdVpJU0V5TTNScnVlSUxQcDRR?oc=5",
-      "orig": "高区代表队在威海全民健身运动会乒乓球比赛中斩获男团冠军、女团亚军 - 威海新闻网",
-      "summary": "【🇨🇳 中国速報】「高区チームは威海国家体育大会の卓球競技で男子団体優勝、女子団体準優勝を果たした。」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] アジア卓球選手権：初のベスト4誕生！前回の準優勝チームは０－３で敗退し、男子団体メダル獲得のチャンスを逃した。若手打線が反撃に成功",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1yS19YY2pHV2xMUzVGTHA1U1oxU3E1cXJ2UUdBUjVNODgwdkQwbUhpOEh5VS1wR0xGZGRiQUZIbHN4ZjNJNDItbWZXSzYwY24xX1dPN21fS3ZoNFdteXd0RDhZcVZhUGJlTUtsS1k1Wmk?oc=5",
+      "orig": "乒乓球亚锦赛：首个4强诞生！上届亚军0-3被淘汰，无缘获男团奖牌 年轻阵容逆袭成功 - 中华网",
+      "summary": "【🇨🇳 中国速報】「アジア卓球選手権：初のベスト4誕生！前回の準優勝チームは０－３で敗退し、男子団体メダル獲得のチャンスを逃した。若手打線が反撃に成功」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
       "source": "🇰🇷 韓国",
-      "title": "📌 [AI和訳] アジアパラゲーム卓球キム・ギテ・キム・ボギョム、男子ダブルス金メダル",
-      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE83bkUzQllpa0lvRTd6LWNROWdnbXpVRHczclQybE9GLXhiLVV6S0RWUk8xdFVUQnNOTFpvTkRJZUZ2ZFptSUFmbmJSUEFxTUtxU1lfeFVqMmJoNzRkMF9VeWh1RFNNR1AtSzBrbjBIWlpnMVF0bUHSAXZBVV95cUxPZE1yOVFqNVpDclRSUmhYYVhvcVdmSWd2dnlCQTYzNUdvOWc1MnZzWmJLWDR1UzVNX1JoMWFJUDZCMXExX2RjdUFuMUo0Q2w2UTNMQjgwRGJaSDRzYmwxd0p1X3kxSy1zNkZwVy0yTXVQRHV4MFN3?oc=5",
-      "orig": "아시안패러게임 탁구 김기태·김보겸, 남자 복식 금메달 - MBC 뉴스",
-      "summary": "【🇰🇷 韓国速報】「アジアパラゲーム卓球キム・ギテ・キム・ボギョム、男子ダブルス金メダル」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] 韓国卓球、金メダル2個追加して8個…目標超過達成[障害者AG]",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5EYXpkXzNYTjhIVzRJN05rSlBtZk9fMXJXVVpGVExfbW1veUgwTkRhV3lyakVWd3JLUzJGZS0taEJZSnQ2ckRXVU1ONmZCblJYVTRMbzZvd2RsZ2xhMG9qOdIBeEFVX3lxTE9Ka2RieHpuMDNuUzhXUE1QSUlLOEktSkFzaGRfMmJoTWZmemZTeGxGNDIzUS1STDJyeWxNSHBPc0EzazFZd3RONDU0Nlh6UmJuVGs5RkpNRWhudGUwQ193c1g5VzM3QWRYb0pYSW5NanpOVTBERkhJZw?oc=5",
+      "orig": "한국 탁구, 금메달 2개 추가해 8개…목표 초과 달성[장애인AG] - 뉴시스",
+      "summary": "【🇰🇷 韓国速報】「韓国卓球、金メダル2個追加して8個…目標超過達成[障害者AG]」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
       "source": "🇰🇷 韓国",
-      "title": "📌 [AI和訳] 卓球キム・ギテ・キム・ボギム、障害者AG男子ダブルス金メダル… 4戦伝承",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFByeTBxaURkLUp4ZFVib2FvOFdjVW5rWTgtS3Vyck9BR2NTRDVGcmlQeGk1ekQxLVJnYjNYZnlBRHU1LVN1V2FnWVEtb1ZPR29pcnlFdFdRVTBmZVnSAWBBVV95cUxPWkk3NzlIYmFGY2NyV1d2S3BySG1GU0p2RHAyQV82MFVFYy1mRFFHd013bTZEX2oyWFM3OENSVnhEZXFVRWhXM1JDang4ZHNNcHpwWmhadGtkVlZGMzg1VFQ?oc=5",
-      "orig": "탁구 김기태·김보겸, 장애인AG 남자복식 금메달…4전 전승 - 연합뉴스",
-      "summary": "【🇰🇷 韓国速報】「卓球キム・ギテ・キム・ボギム、障害者AG男子ダブルス金メダル… 4戦伝承」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] 「超大型異変」韓卓球、世界158位カン・ドンスが日世界3位「11-0」圧殺！世界1位も破った…亞選手権男子団体3-1完勝→5年ぶりの決勝行",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBVUkVMQ21oWThDaVNEcFN4TE45b3hCcmp5UTJNVWh2eXJqWkRJTzBhYVpGN25VSTN2NFhJMU1hYTFuaThZUmcwVHZWRkRmQVhxLU9zRjFQc1ZGaExjT0tnSHdGaFVTUzExRWfSAW9BVV95cUxNT3ZkbzYyeVo1YmRwTkNOaTdZV3RIWUZyTlhnc3h6czZjaTU1NXY2bTF0bDBZY2ZKZWRDblU3OU5XNThIOElqRDlHNW85TmI0bEZSZjUyMms5dGI3UF9xU1hEYVpuS2lEeHBmdnNndjA?oc=5",
+      "orig": "'초대형 이변' 韓 탁구, 세계 158위 강동수가 日 세계 3위 '11-0' 압살! 세계 1위도 꺾었다...亞선수권 男 단체 3-1 완승→5년 만의 결승행 - 머니투데이 - 머니투데이",
+      "summary": "【🇰🇷 韓国速報】「「超大型異変」韓卓球、世界158位カン・ドンスが日世界3位「11-0」圧殺！世界1位も破った…亞選手権男子団体3-1完勝→5年ぶりの決勝行」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     },
     {
       "source": "🇰🇷 韓国",
-      "title": "📌 [AI和訳] 卓球、パラゲーム目標金メダル7個達成…キム・ギテ、キム・ボ兼",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBlU2xqLWNnX1B1Wm55c085WUhVdnBhNzUyQldrTXVEZW1pOUtVV2F2UDlmNnBlandzSy1JMFowVHhYM1JuOVBWZDVEOFNkXzdxN3Z1SlJLWFpsN29fQ3c?oc=5",
-      "orig": "탁구, 패러게임 목표 금메달 7개 달성…김기태·김보겸 남자복식 金 - 뉴스1",
-      "summary": "【🇰🇷 韓国速報】「卓球、パラゲーム目標金メダル7個達成…キム・ギテ、キム・ボ兼」に関する現地メディアの最新トピックス記事です。",
+      "title": "📌 [AI和訳] 「パリ銀メダリスト」崩れた韓国卓球デュオ…チャン・ヨンジン・イミギュ、初呼吸にアジア首脳[名古屋APG]",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBxaWMzUVhKZDhVUmZSY1ByM0xHS3A4Zm9YWW9mQTdSWlBKdHRlYS03cTU3TVVUblFrVVRsMVVqUnFSMGZtSHpIVEd6a0ExRUlKR09qZU1DZWM3VTZ6MWM1RzFUbjZSUWJs?oc=5",
+      "orig": "'파리 은메달리스트' 무너뜨린 한국 탁구 듀오…장영진·이미규, 첫 호흡에 아시아 정상 [나고야 APG] - 일간스포츠",
+      "summary": "【🇰🇷 韓国速報】「「パリ銀メダリスト」崩れた韓国卓球デュオ…チャン・ヨンジン・イミギュ、初呼吸にアジア首脳[名古屋APG]」に関する現地メディアの最新トピックス記事です。",
       "time": "最新"
     }
   ]
